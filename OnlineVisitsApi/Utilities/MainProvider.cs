@@ -9,7 +9,8 @@ namespace OnlineVisitsApi.Utilities
 {
     public class MainProvider
     {
-        private static readonly string ConnectionString ="Data Source=109.169.76.94;Initial Catalog=azarkand_OnlineVisits;User ID=azarkand_Yanal;Password=1710ahmad.fard"
+        private static readonly string ConnectionString =
+            "Data Source=109.169.76.94;Initial Catalog=azarkand_OnlineVisits;User ID=azarkand_Yanal;Password=1710ahmad.fard";
         private SqlConnection _connection;
         private SqlCommand _command;
         private string _commandText = "";
