@@ -84,6 +84,10 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiDecoder\DoctorCore.cs" />
+    <Compile Include="ApiDecoder\DoctorProgramRelCore.cs" />
+    <Compile Include="ApiDecoder\PatientCore.cs" />
+    <Compile Include="ApiDecoder\ProgramCore.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\DoctorController.cs" />
     <Compile Include="Controllers\DoctorProgramRelController.cs" />
@@ -130,7 +134,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ApiDecoder\" />
     <Folder Include="App_Data\" />
   </ItemGroup>
   <PropertyGroup>
