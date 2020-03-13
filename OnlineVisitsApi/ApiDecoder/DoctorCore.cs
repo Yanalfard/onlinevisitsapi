@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
-using HelthTourismV2.Models.Dto;
-using HelthTourismV2.Models.Regular;
+using OnlineVisitsApi.Models.Dto;
+using OnlineVisitsApi.Models.Regular;
 
-namespace HelthTourismV2.ApiDecoder
+namespace OnlineVisitsApi.ApiDecoder
 {
     public class DoctorCore : ApiController
     {
@@ -23,7 +23,7 @@ namespace HelthTourismV2.ApiDecoder
         public async Task<TblDoctor> AddDoctor(TblDoctor doctor)
         {
             HttpResponseMessage httpResponseMessage = await _httpClient.PostAsJsonAsync("api/DoctorCore/AddDoctor", doctor);
-            bool ans = await httpResponseMessage.Content.ReadAsAsync<bool>();
+            TblDoctor ans = await httpResponseMessage.Content.ReadAsAsync<TblDoctor>();
             return ans;
         }
         public async Task<bool> DeleteDoctor(int id)

@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
-using HelthTourismV2.Models.Dto;
-using HelthTourismV2.Models.Regular;
+using OnlineVisitsApi.Models.Dto;
+using OnlineVisitsApi.Models.Regular;
 
-namespace HelthTourismV2.ApiDecoder
+namespace OnlineVisitsApi.ApiDecoder
 {
     public class ProgramCore : ApiController
     {
@@ -23,16 +23,18 @@ namespace HelthTourismV2.ApiDecoder
         public async Task<TblProgram> AddProgram(TblProgram program)
         {
             HttpResponseMessage httpResponseMessage = await _httpClient.PostAsJsonAsync("api/ProgramCore/AddProgram", program);
-            bool ans = await httpResponseMessage.Content.ReadAsAsync<bool>();
+            TblProgram ans = await httpResponseMessage.Content.ReadAsAsync<TblProgram>();
             return ans;
         }
-        public async Task<bool> DeleteProgram(int id)
+
+        public async Task<bool> DeleteProgram(int id)
         {
             HttpResponseMessage httpResponseMessage = await _httpClient.PostAsJsonAsync($"api/ProgramCore/DeleteProgram?id={id}", id);
             bool ans = await httpResponseMessage.Content.ReadAsAsync<bool>();
             return ans;
         }
-        public async Task<bool> UpdateProgram(TblProgram program, int logId)
+
+        public async Task<bool> UpdateProgram(TblProgram program, int logId)
         {
             List<object> programAndLogId = new List<object>();
             programAndLogId.Add(program);
@@ -41,18 +43,21 @@ namespace HelthTourismV2.ApiDecoder
             bool ans = await httpResponseMessage.Content.ReadAsAsync<bool>();
             return ans;
         }
-        public async Task<List<DtoTblProgram>> SelectAllPrograms()
+
+        public async Task<List<DtoTblProgram>> SelectAllPrograms()
         {
             HttpResponseMessage httpResponseMessage = await _httpClient.GetAsync("api/ProgramCore/SelectAllPrograms");
             List<DtoTblProgram> ans = await httpResponseMessage.Content.ReadAsAsync<List<DtoTblProgram>>();
             return ans;
         }
-        public async Task<TblProgram> SelectProgramById(int id)
+
+        public async Task<TblProgram> SelectProgramById(int id)
         {
             HttpResponseMessage httpResponseMessage = await _httpClient.PostAsJsonAsync($"api/ProgramCore/SelectProgramById?id={id}", id);
             TblProgram ans = await httpResponseMessage.Content.ReadAsAsync<TblProgram>();
             return ans;
         }
-
+
+
     }
 }
