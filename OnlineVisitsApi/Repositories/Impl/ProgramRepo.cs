@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using OnlineVisitsApi.Models.Regular;
 using OnlineVisitsApi.Repositories.Api;
-using OnlineVisitsApi.Utillities;
+using OnlineVisitsApi.Utilities;
 
 namespace OnlineVisitsApi.Repositories.Impl
 {

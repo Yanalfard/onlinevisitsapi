@@ -18,6 +18,7 @@ namespace OnlineVisitsApi.Models.Dto
         public string Secret { get; set; }
         public string Section { get; set; }
         public string ReservedTill { get; set; }
+        public long VisitFee { get; set; }
 
         public HttpStatusCode StatusEffect { get; set; }
 
@@ -36,6 +37,7 @@ namespace OnlineVisitsApi.Models.Dto
             Secret = doctor.Secret;
             Section = doctor.Section;
             ReservedTill = doctor.ReservedTill;
+            VisitFee = doctor.VisitFee;
 
             StatusEffect = statusEffect;
         }

@@ -3,7 +3,7 @@ using System.Configuration;
 using System.Data.SqlClient;
 using System.IO;
 
-namespace OnlineVisitsApi.Utillities
+namespace OnlineVisitsApi.Utilities
 {
     public class MethodRepo
     {

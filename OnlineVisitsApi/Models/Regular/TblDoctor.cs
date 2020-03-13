@@ -15,13 +15,14 @@ namespace OnlineVisitsApi.Models.Regular
         public string Secret { get; set; }
         public string Section { get; set; }
         public string ReservedTill { get; set; }
+        public long VisitFee { get; set; }
 
         public TblDoctor(int id)
         {
             this.id = id;
         }
 
-		public TblDoctor(int id, string firstName, string lastName, string tellNo, string identificationNo, string province, string city, long cash, string username, string password, string secret, string section, string reservedTill)
+		public TblDoctor(int id, string firstName, string lastName, string tellNo, string identificationNo, string province, string city, long cash, string username, string password, string secret, string section, string reservedTill, long visitFee)
         {
             this.id = id;
             FirstName = firstName;
@@ -36,8 +37,9 @@ namespace OnlineVisitsApi.Models.Regular
             Secret = secret;
             Section = section;
             ReservedTill = reservedTill;
+            VisitFee = visitFee;
         }
-        public TblDoctor(string firstName, string lastName, string tellNo, string identificationNo, string province, string city, long cash, string username, string password, string secret, string section, string reservedTill)
+        public TblDoctor(string firstName, string lastName, string tellNo, string identificationNo, string province, string city, long cash, string username, string password, string secret, string section, string reservedTill, long visitFee)
         {
             FirstName = firstName;
             LastName = lastName;
@@ -51,6 +53,7 @@ namespace OnlineVisitsApi.Models.Regular
             Secret = secret;
             Section = section;
             ReservedTill = reservedTill;
+            VisitFee = visitFee;
         }
 
         public TblDoctor()

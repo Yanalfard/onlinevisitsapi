@@ -121,8 +121,8 @@
     <Compile Include="Services\Impl\DoctorService.cs" />
     <Compile Include="Services\Impl\PatientService.cs" />
     <Compile Include="Services\Impl\ProgramService.cs" />
-    <Compile Include="Utillities\MainProvider.cs" />
-    <Compile Include="Utillities\MethodRepo.cs" />
+    <Compile Include="Utilities\MainProvider.cs" />
+    <Compile Include="Utilities\MethodRepo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
