@@ -15,6 +15,8 @@ namespace OnlineVisitsApi.Models.Dto
         public string Username { get; set; }
         public string Password { get; set; }
         public string Secret { get; set; }
+        public string ReserveTime { get; set; }
+        public string ReserveTime2 { get; set; }
 
         public HttpStatusCode StatusEffect { get; set; }
 
@@ -30,6 +32,8 @@ namespace OnlineVisitsApi.Models.Dto
             Username = patient.Username;
             Password = patient.Password;
             Secret = patient.Secret;
+            ReserveTime = patient.ReserveTime;
+            ReserveTime2 = patient.ReserveTime2;
 
             StatusEffect = statusEffect;
         }
