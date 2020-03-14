@@ -74,7 +74,7 @@ namespace OnlineVisitsApi.Controllers
         {
             var task = Task.Run(() => new ProgramService().SelectProgramById(id));
             if (task.Wait(TimeSpan.FromSeconds(10)))
-                if (task.Result.id != -1)
+                if (task.Result != null)
                     return Ok(new DtoTblProgram(task.Result, HttpStatusCode.OK));
                 else
                     return Conflict();

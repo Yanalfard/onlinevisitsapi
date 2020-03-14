@@ -74,7 +74,7 @@ namespace OnlineVisitsApi.Controllers
         {
             var task = Task.Run(() => new PatientService().SelectPatientById(id));
             if (task.Wait(TimeSpan.FromSeconds(10)))
-                if (task.Result.id != -1)
+                if (task.Result != null)
                     return Ok(new DtoTblPatient(task.Result, HttpStatusCode.OK));
                 else
                     return Conflict();
@@ -86,7 +86,7 @@ namespace OnlineVisitsApi.Controllers
         {
             var task = Task.Run(() => new PatientService().SelectPatientByTellNo(tellNo));
             if (task.Wait(TimeSpan.FromSeconds(10)))
-                if (task.Result.id != -1)
+                if (task.Result != null)
                     return Ok(new DtoTblPatient(task.Result, HttpStatusCode.OK));
                 else
                     return Conflict();
@@ -99,7 +99,7 @@ namespace OnlineVisitsApi.Controllers
         {
             var task = Task.Run(() => new PatientService().SelectPatientByFirstName(firstName));
             if (task.Wait(TimeSpan.FromSeconds(10)))
-                if (task.Result.id != -1)
+                if (task.Result != null)
                     return Ok(new DtoTblPatient(task.Result, HttpStatusCode.OK));
                 else
                     return Conflict();
@@ -111,7 +111,7 @@ namespace OnlineVisitsApi.Controllers
         {
             var task = Task.Run(() => new PatientService().SelectPatientByLastName(lastName));
             if (task.Wait(TimeSpan.FromSeconds(10)))
-                if (task.Result.id != -1)
+                if (task.Result != null)
                     return Ok(new DtoTblPatient(task.Result, HttpStatusCode.OK));
                 else
                     return Conflict();
@@ -142,7 +142,7 @@ namespace OnlineVisitsApi.Controllers
             string password = JsonConvert.DeserializeObject<string>(usernamePassword[1].ToString());
             var task = Task.Run(() => new PatientService().SelectPatientByUsernameAndPassword(username, password));
             if (task.Wait(TimeSpan.FromSeconds(10)))
-                if (task.Result.id != -1)
+                if (task.Result != null)
                     return Ok(new DtoTblPatient(task.Result, HttpStatusCode.OK));
                 else
                     return Conflict();
@@ -154,7 +154,7 @@ namespace OnlineVisitsApi.Controllers
         {
             var task = Task.Run(() => new PatientService().SelectPatientByUsername(username));
             if (task.Wait(TimeSpan.FromSeconds(10)))
-                if (task.Result.id != -1)
+                if (task.Result != null)
                     return Ok(new DtoTblPatient(task.Result, HttpStatusCode.OK));
                 else
                     return Conflict();
@@ -166,7 +166,7 @@ namespace OnlineVisitsApi.Controllers
         {
             var task = Task.Run(() => new PatientService().SelectPatientByPassword(password));
             if (task.Wait(TimeSpan.FromSeconds(10)))
-                if (task.Result.id != -1)
+                if (task.Result != null)
                     return Ok(new DtoTblPatient(task.Result, HttpStatusCode.OK));
                 else
                     return Conflict();

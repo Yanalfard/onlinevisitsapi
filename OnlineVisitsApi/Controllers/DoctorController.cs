@@ -74,7 +74,7 @@ namespace OnlineVisitsApi.Controllers
         {
             var task = Task.Run(() => new DoctorService().SelectDoctorById(id));
             if (task.Wait(TimeSpan.FromSeconds(10)))
-                if (task.Result.id != -1)
+                if (task.Result != null)
                     return Ok(new DtoTblDoctor(task.Result, HttpStatusCode.OK));
                 else
                     return Conflict();
@@ -87,7 +87,7 @@ namespace OnlineVisitsApi.Controllers
         {
             var task = Task.Run(() => new DoctorService().SelectDoctorByFirstName(firstName));
             if (task.Wait(TimeSpan.FromSeconds(10)))
-                if (task.Result.id != -1)
+                if (task.Result != null)
                     return Ok(new DtoTblDoctor(task.Result, HttpStatusCode.OK));
                 else
                     return Conflict();
@@ -99,7 +99,7 @@ namespace OnlineVisitsApi.Controllers
         {
             var task = Task.Run(() => new DoctorService().SelectDoctorByLastName(lastName));
             if (task.Wait(TimeSpan.FromSeconds(10)))
-                if (task.Result.id != -1)
+                if (task.Result != null)
                     return Ok(new DtoTblDoctor(task.Result, HttpStatusCode.OK));
                 else
                     return Conflict();
@@ -111,7 +111,7 @@ namespace OnlineVisitsApi.Controllers
         {
             var task = Task.Run(() => new DoctorService().SelectDoctorByTellNo(tellNo));
             if (task.Wait(TimeSpan.FromSeconds(10)))
-                if (task.Result.id != -1)
+                if (task.Result != null)
                     return Ok(new DtoTblDoctor(task.Result, HttpStatusCode.OK));
                 else
                     return Conflict();
@@ -142,7 +142,7 @@ namespace OnlineVisitsApi.Controllers
             string password = JsonConvert.DeserializeObject<string>(usernamePassword[1].ToString());
             var task = Task.Run(() => new DoctorService().SelectDoctorByUsernameAndPassword(username, password));
             if (task.Wait(TimeSpan.FromSeconds(10)))
-                if (task.Result.id != -1)
+                if (task.Result != null)
                     return Ok(new DtoTblDoctor(task.Result, HttpStatusCode.OK));
                 else
                     return Conflict();
@@ -154,7 +154,7 @@ namespace OnlineVisitsApi.Controllers
         {
             var task = Task.Run(() => new DoctorService().SelectDoctorByUsername(username));
             if (task.Wait(TimeSpan.FromSeconds(10)))
-                if (task.Result.id != -1)
+                if (task.Result != null)
                     return Ok(new DtoTblDoctor(task.Result, HttpStatusCode.OK));
                 else
                     return Conflict();
@@ -166,7 +166,7 @@ namespace OnlineVisitsApi.Controllers
         {
             var task = Task.Run(() => new DoctorService().SelectDoctorByPassword(password));
             if (task.Wait(TimeSpan.FromSeconds(10)))
-                if (task.Result.id != -1)
+                if (task.Result != null)
                     return Ok(new DtoTblDoctor(task.Result, HttpStatusCode.OK));
                 else
                     return Conflict();
