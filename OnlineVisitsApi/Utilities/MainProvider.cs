@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data.SqlClient;
 using OnlineVisitsApi.Models.Regular;
 
@@ -9,8 +8,7 @@ namespace OnlineVisitsApi.Utilities
 {
     public class MainProvider
     {
-        private static readonly string ConnectionString =
-            "Data Source=109.169.76.94;Initial Catalog=azarkand_OnlineVisits;User ID=azarkand_Yanal;Password=1710ahmad.fard";
+        private static readonly string ConnectionString = "Data Source=109.169.76.94;Initial Catalog=azarkand_OnlineVisits;User ID=azarkand_Yanal;Password=1710ahmad.fard";
         private SqlConnection _connection;
         private SqlCommand _command;
         private string _commandText = "";
@@ -286,6 +284,7 @@ namespace OnlineVisitsApi.Utilities
             {
                 _command = new SqlCommand($"select* from TblPatient where FirstName = N'{firstName}'", _connection);
                 SqlDataReader reader = _command.ExecuteReader();
+                reader.Read();
                 return new TblPatient(reader["id"].ToString() != "" ? Convert.ToInt32(reader["id"]) : 0, reader["FirstName"].ToString(), reader["LastName"].ToString(), reader["TellNo"].ToString(), reader["IdentificationNo"].ToString(), reader["Province"].ToString(), reader["City"].ToString(), reader["Username"].ToString(), reader["Password"].ToString(), reader["Secret"].ToString(), reader["ReserveTime"].ToString(), reader["ReserveTime2"].ToString());
             }
             catch
@@ -303,6 +302,7 @@ namespace OnlineVisitsApi.Utilities
             {
                 _command = new SqlCommand($"select* from TblPatient where LastName = N'{lastName}'", _connection);
                 SqlDataReader reader = _command.ExecuteReader();
+                reader.Read();
                 return new TblPatient(reader["id"].ToString() != "" ? Convert.ToInt32(reader["id"]) : 0, reader["FirstName"].ToString(), reader["LastName"].ToString(), reader["TellNo"].ToString(), reader["IdentificationNo"].ToString(), reader["Province"].ToString(), reader["City"].ToString(), reader["Username"].ToString(), reader["Password"].ToString(), reader["Secret"].ToString(), reader["ReserveTime"].ToString(), reader["ReserveTime2"].ToString());
             }
             catch
@@ -320,6 +320,7 @@ namespace OnlineVisitsApi.Utilities
             {
                 _command = new SqlCommand($"select* from TblPatient where TellNo = N'{tellNo}'", _connection);
                 SqlDataReader reader = _command.ExecuteReader();
+                reader.Read();
                 return new TblPatient(reader["id"].ToString() != "" ? Convert.ToInt32(reader["id"]) : 0, reader["FirstName"].ToString(), reader["LastName"].ToString(), reader["TellNo"].ToString(), reader["IdentificationNo"].ToString(), reader["Province"].ToString(), reader["City"].ToString(), reader["Username"].ToString(), reader["Password"].ToString(), reader["Secret"].ToString(), reader["ReserveTime"].ToString(), reader["ReserveTime2"].ToString());
             }
             catch
@@ -357,6 +358,7 @@ namespace OnlineVisitsApi.Utilities
             {
                 _command = new SqlCommand($"select* from TblPatient where Username = N'{username}'", _connection);
                 SqlDataReader reader = _command.ExecuteReader();
+                reader.Read();
                 return new TblPatient(reader["id"].ToString() != "" ? Convert.ToInt32(reader["id"]) : 0, reader["FirstName"].ToString(), reader["LastName"].ToString(), reader["TellNo"].ToString(), reader["IdentificationNo"].ToString(), reader["Province"].ToString(), reader["City"].ToString(), reader["Username"].ToString(), reader["Password"].ToString(), reader["Secret"].ToString(), reader["ReserveTime"].ToString(), reader["ReserveTime2"].ToString());
             }
             catch
@@ -392,6 +394,7 @@ namespace OnlineVisitsApi.Utilities
             {
                 _command = new SqlCommand($"select* from TblPatient where Password = N'{password}'", _connection);
                 SqlDataReader reader = _command.ExecuteReader();
+                reader.Read();
                 return new TblPatient(reader["id"].ToString() != "" ? Convert.ToInt32(reader["id"]) : 0, reader["FirstName"].ToString(), reader["LastName"].ToString(), reader["TellNo"].ToString(), reader["IdentificationNo"].ToString(), reader["Province"].ToString(), reader["City"].ToString(), reader["Username"].ToString(), reader["Password"].ToString(), reader["Secret"].ToString(), reader["ReserveTime"].ToString(), reader["ReserveTime2"].ToString());
             }
             catch
@@ -415,6 +418,7 @@ namespace OnlineVisitsApi.Utilities
             {
                 _command = new SqlCommand($"select* from TblDoctor where FirstName = N'{firstName}'", _connection);
                 SqlDataReader reader = _command.ExecuteReader();
+                reader.Read();
                 return new TblDoctor(reader["id"].ToString() != "" ? Convert.ToInt32(reader["id"]) : 0, reader["FirstName"].ToString(), reader["LastName"].ToString(), reader["TellNo"].ToString(), reader["IdentificationNo"].ToString(), reader["Province"].ToString(), reader["City"].ToString(), reader["Cash"].ToString() != "" ? long.Parse(reader["Cash"].ToString()) : 0, reader["Username"].ToString(), reader["Password"].ToString(), reader["Secret"].ToString(), reader["Section"].ToString(), reader["ReservedTill"].ToString(), reader["VisitFee"].ToString() != "" ? long.Parse(reader["VisitFee"].ToString()) : 0);
             }
             catch
@@ -432,6 +436,7 @@ namespace OnlineVisitsApi.Utilities
             {
                 _command = new SqlCommand($"select* from TblDoctor where LastName = N'{lastName}'", _connection);
                 SqlDataReader reader = _command.ExecuteReader();
+                reader.Read();
                 return new TblDoctor(reader["id"].ToString() != "" ? Convert.ToInt32(reader["id"]) : 0, reader["FirstName"].ToString(), reader["LastName"].ToString(), reader["TellNo"].ToString(), reader["IdentificationNo"].ToString(), reader["Province"].ToString(), reader["City"].ToString(), reader["Cash"].ToString() != "" ? long.Parse(reader["Cash"].ToString()) : 0, reader["Username"].ToString(), reader["Password"].ToString(), reader["Secret"].ToString(), reader["Section"].ToString(), reader["ReservedTill"].ToString(), reader["VisitFee"].ToString() != "" ? long.Parse(reader["VisitFee"].ToString()) : 0);
             }
             catch
@@ -449,6 +454,7 @@ namespace OnlineVisitsApi.Utilities
             {
                 _command = new SqlCommand($"select* from TblDoctor where TellNo = N'{tellNo}'", _connection);
                 SqlDataReader reader = _command.ExecuteReader();
+                reader.Read();
                 return new TblDoctor(reader["id"].ToString() != "" ? Convert.ToInt32(reader["id"]) : 0, reader["FirstName"].ToString(), reader["LastName"].ToString(), reader["TellNo"].ToString(), reader["IdentificationNo"].ToString(), reader["Province"].ToString(), reader["City"].ToString(), reader["Cash"].ToString() != "" ? long.Parse(reader["Cash"].ToString()) : 0, reader["Username"].ToString(), reader["Password"].ToString(), reader["Secret"].ToString(), reader["Section"].ToString(), reader["ReservedTill"].ToString(), reader["VisitFee"].ToString() != "" ? long.Parse(reader["VisitFee"].ToString()) : 0);
             }
             catch
@@ -486,6 +492,7 @@ namespace OnlineVisitsApi.Utilities
             {
                 _command = new SqlCommand($"select* from TblDoctor where Username = N'{username}'", _connection);
                 SqlDataReader reader = _command.ExecuteReader();
+                reader.Read();
                 return new TblDoctor(reader["id"].ToString() != "" ? Convert.ToInt32(reader["id"]) : 0, reader["FirstName"].ToString(), reader["LastName"].ToString(), reader["TellNo"].ToString(), reader["IdentificationNo"].ToString(), reader["Province"].ToString(), reader["City"].ToString(), reader["Cash"].ToString() != "" ? long.Parse(reader["Cash"].ToString()) : 0, reader["Username"].ToString(), reader["Password"].ToString(), reader["Secret"].ToString(), reader["Section"].ToString(), reader["ReservedTill"].ToString(), reader["VisitFee"].ToString() != "" ? long.Parse(reader["VisitFee"].ToString()) : 0);
             }
             catch
@@ -521,6 +528,7 @@ namespace OnlineVisitsApi.Utilities
             {
                 _command = new SqlCommand($"select* from TblDoctor where Password = N'{password}'", _connection);
                 SqlDataReader reader = _command.ExecuteReader();
+                reader.Read();
                 return new TblDoctor(reader["id"].ToString() != "" ? Convert.ToInt32(reader["id"]) : 0, reader["FirstName"].ToString(), reader["LastName"].ToString(), reader["TellNo"].ToString(), reader["IdentificationNo"].ToString(), reader["Province"].ToString(), reader["City"].ToString(), reader["Cash"].ToString() != "" ? long.Parse(reader["Cash"].ToString()) : 0, reader["Username"].ToString(), reader["Password"].ToString(), reader["Secret"].ToString(), reader["Section"].ToString(), reader["ReservedTill"].ToString(), reader["VisitFee"].ToString() != "" ? long.Parse(reader["VisitFee"].ToString()) : 0);
             }
             catch
