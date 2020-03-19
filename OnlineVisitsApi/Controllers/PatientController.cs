@@ -172,6 +172,18 @@ namespace OnlineVisitsApi.Controllers
                     return Conflict();
             return StatusCode(HttpStatusCode.RequestTimeout);
         }
-
+
+        [Route("Reserve")]
+        [HttpPost]
+        public IHttpActionResult Reserve(int doctorId)
+        {
+            var task = Task.Run(() => new PatientService().Reserve(doctorId));
+            if (task.Wait(TimeSpan.FromSeconds(10)))
+                if (task.Result)
+                    return Ok(true);
+                else
+                    return Conflict();
+            return StatusCode(HttpStatusCode.RequestTimeout);
+        }
     }
 }

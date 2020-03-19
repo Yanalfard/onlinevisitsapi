@@ -17,6 +17,6 @@ namespace OnlineVisitsApi.Repositories.Api
         TblPatient SelectPatientByUsernameAndPassword(string username ,string password);
         TblPatient SelectPatientByUsername(string username);
         TblPatient SelectPatientByPassword(string password);
-
+        bool Reserve(int doctorId);
     }
 }
