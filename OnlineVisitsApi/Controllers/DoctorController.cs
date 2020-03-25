@@ -4,6 +4,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using OnlineVisitsApi.Models.Dto;
 using OnlineVisitsApi.Models.Regular;
 using OnlineVisitsApi.Services.Impl;
@@ -183,7 +184,7 @@ namespace OnlineVisitsApi.Controllers
                     List<DtoTblProgram> dto = new List<DtoTblProgram>();
                     foreach (TblProgram obj in task.Result)
                         dto.Add(new DtoTblProgram(obj, HttpStatusCode.OK));
-                    return Ok(dto);
+                    return Ok(dto.ToArray());
                 }
                 else
                     return Conflict();
