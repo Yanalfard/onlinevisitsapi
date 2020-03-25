@@ -20,7 +20,7 @@ namespace OnlineVisitsApi.Controllers
             var task = Task.Run(() => new DoctorService().AddDoctor(doctor));
             if (task.Wait(TimeSpan.FromSeconds(10)))
                 if (task.Result != null)
-                    return Ok(true);
+                    return Ok(new DtoTblDoctor(task.Result, HttpStatusCode.OK));
                 else
                     return Conflict();
             return StatusCode(HttpStatusCode.RequestTimeout);

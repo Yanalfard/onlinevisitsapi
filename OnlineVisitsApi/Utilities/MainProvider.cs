@@ -50,8 +50,8 @@ namespace OnlineVisitsApi.Utilities
                 {
                     TblProgram program = (TblProgram)tableObj;
 
-                    _commandText = $"insert into TblProgram (Day , TimeStart1 , TimeEnd1 , TimeStart2 , TimeEnd2 , TimeStart3 , TimeEnd3) values ('{program.Day}' , '{program.TimeStart1}' , '{program.TimeEnd1}' , '{program.TimeStart2}' , '{program.TimeEnd2}' , '{program.TimeStart3}' , '{program.TimeEnd3}' )";
-                    command = new SqlCommand($"select TOP (1) * from TblProgram where Day = '{program.Day}' ORDER BY id DESC", _connection);
+                    _commandText = $"insert into TblProgram (Day , TimeStart1 , TimeEnd1 , TimeStart2 , TimeEnd2 , TimeStart3 , TimeEnd3) values (N'{program.Day}' , N'{program.TimeStart1}' , N'{program.TimeEnd1}' , N'{program.TimeStart2}' , N'{program.TimeEnd2}' , N'{program.TimeStart3}' , N'{program.TimeEnd3}' )";
+                    command = new SqlCommand($"select TOP (1) * from TblProgram where Day = N'{program.Day}' ORDER BY id DESC", _connection);
                     _command = new SqlCommand(_commandText, _connection);
                     _command.ExecuteNonQuery();
                     SqlDataReader reader = command.ExecuteReader();
@@ -62,8 +62,8 @@ namespace OnlineVisitsApi.Utilities
                 {
                     TblDoctorProgramRel doctorProgramRel = (TblDoctorProgramRel)tableObj;
 
-                    _commandText = $"insert into TblDoctorProgramRel (DoctorId , ProgramId) values ('{doctorProgramRel.DoctorId}' , '{doctorProgramRel.ProgramId}' )";
-                    command = new SqlCommand($"select TOP (1) * from TblDoctorProgramRel where id = '{doctorProgramRel.id}' ORDER BY id DESC", _connection);
+                    _commandText = $"insert into TblDoctorProgramRel (DoctorId , ProgramId) values (N'{doctorProgramRel.DoctorId}' , N'{doctorProgramRel.ProgramId}' )";
+                    command = new SqlCommand($"select TOP (1) * from TblDoctorProgramRel where id = N'{doctorProgramRel.id}' ORDER BY id DESC", _connection);
                     _command = new SqlCommand(_commandText, _connection);
                     _command.ExecuteNonQuery();
                     SqlDataReader reader = command.ExecuteReader();
@@ -75,8 +75,8 @@ namespace OnlineVisitsApi.Utilities
                     TblPatient patient = (TblPatient)tableObj;
                     if (!MethodRepo.ExistInDb("TblPatient", "Username", patient.Username))
                     {
-                        _commandText = $"insert into TblPatient (FirstName , LastName , TellNo , IdentificationNo , Province , City , Username , Password , Secret , ReserveTime , ReserveTime2) values ('{patient.FirstName}' , '{patient.LastName}' , '{patient.TellNo}' , '{patient.IdentificationNo}' , '{patient.Province}' , '{patient.City}' , '{patient.Username}' , '{patient.Password}' , '{patient.Secret}' , '{patient.ReserveTime}' , '{patient.ReserveTime2}' )";
-                        command = new SqlCommand($"select TOP (1) * from TblPatient where Username = '{patient.Username}' ORDER BY id DESC", _connection);
+                        _commandText = $"insert into TblPatient (FirstName , LastName , TellNo , IdentificationNo , Province , City , Username , Password , Secret , ReserveTime , ReserveTime2) values (N'{patient.FirstName}' , N'{patient.LastName}' , N'{patient.TellNo}' , N'{patient.IdentificationNo}' , N'{patient.Province}' , N'{patient.City}' , N'{patient.Username}' , N'{patient.Password}' , N'{patient.Secret}' , N'{patient.ReserveTime}' , N'{patient.ReserveTime2}' )";
+                        command = new SqlCommand($"select TOP (1) * from TblPatient where Username = N'{patient.Username}' ORDER BY id DESC", _connection);
                         _command = new SqlCommand(_commandText, _connection);
                         _command.ExecuteNonQuery();
                         SqlDataReader reader = command.ExecuteReader();
@@ -90,8 +90,8 @@ namespace OnlineVisitsApi.Utilities
                     TblDoctor doctor = (TblDoctor)tableObj;
                     if (!MethodRepo.ExistInDb("TblDoctor", "Username", doctor.Username))
                     {
-                        _commandText = $"insert into TblDoctor (FirstName , LastName , TellNo , IdentificationNo , Province , City , Cash , Username , Password , Secret , Section , ReservedTill , VisitFee) values ('{doctor.FirstName}' , '{doctor.LastName}' , '{doctor.TellNo}' , '{doctor.IdentificationNo}' , '{doctor.Province}' , '{doctor.City}' , '{doctor.Cash}' , '{doctor.Username}' , '{doctor.Password}' , '{doctor.Secret}' , '{doctor.Section}' , '{doctor.ReservedTill}' , '{doctor.VisitFee}' )";
-                        command = new SqlCommand($"select TOP (1) * from TblDoctor where Username = '{doctor.Username}' ORDER BY id DESC", _connection);
+                        _commandText = $"insert into TblDoctor (FirstName , LastName , TellNo , IdentificationNo , Province , City , Cash , Username , Password , Secret , Section , ReservedTill , VisitFee) values (N'{doctor.FirstName}' , N'{doctor.LastName}' , N'{doctor.TellNo}' , N'{doctor.IdentificationNo}' , N'{doctor.Province}' , N'{doctor.City}' , N'{doctor.Cash}' , N'{doctor.Username}' , N'{doctor.Password}' , N'{doctor.Secret}' , N'{doctor.Section}' , N'{doctor.ReservedTill}' , N'{doctor.VisitFee}' )";
+                        command = new SqlCommand($"select TOP (1) * from TblDoctor where Username = N'{doctor.Username}' ORDER BY id DESC", _connection);
                         _command = new SqlCommand(_commandText, _connection);
                         _command.ExecuteNonQuery();
                         SqlDataReader reader = command.ExecuteReader();
@@ -122,22 +122,22 @@ namespace OnlineVisitsApi.Utilities
                 if (table.GetType() == typeof(TblProgram))
                 {
                     TblProgram program = (TblProgram)tableObj;
-                    _commandText = $"update TblProgram set Day = '{program.Day}' , TimeStart1 = '{program.TimeStart1}' , TimeEnd1 = '{program.TimeEnd1}' , TimeStart2 = '{program.TimeStart2}' , TimeEnd2 = '{program.TimeEnd2}' , TimeStart3 = '{program.TimeStart3}' , TimeEnd3 = '{program.TimeEnd3}' where id = '{logId}'";
+                    _commandText = $"update TblProgram set Day = N'{program.Day}' , TimeStart1 = N'{program.TimeStart1}' , TimeEnd1 = N'{program.TimeEnd1}' , TimeStart2 = N'{program.TimeStart2}' , TimeEnd2 = N'{program.TimeEnd2}' , TimeStart3 = N'{program.TimeStart3}' , TimeEnd3 = N'{program.TimeEnd3}' where id = N'{logId}'";
                 }
                 else if (table.GetType() == typeof(TblDoctorProgramRel))
                 {
                     TblDoctorProgramRel doctorProgramRel = (TblDoctorProgramRel)tableObj;
-                    _commandText = $"update TblDoctorProgramRel set DoctorId = '{doctorProgramRel.DoctorId}' , ProgramId = '{doctorProgramRel.ProgramId}' where id = '{logId}'";
+                    _commandText = $"update TblDoctorProgramRel set DoctorId = N'{doctorProgramRel.DoctorId}' , ProgramId = N'{doctorProgramRel.ProgramId}' where id = N'{logId}'";
                 }
                 else if (table.GetType() == typeof(TblPatient))
                 {
                     TblPatient patient = (TblPatient)tableObj;
-                    _commandText = $"update TblPatient set FirstName = '{patient.FirstName}' , LastName = '{patient.LastName}' , TellNo = '{patient.TellNo}' , IdentificationNo = '{patient.IdentificationNo}' , Province = '{patient.Province}' , City = '{patient.City}' , Username = '{patient.Username}' , Password = '{patient.Password}' , Secret = '{patient.Secret}' , ReserveTime = '{patient.ReserveTime}' , ReserveTime2 = '{patient.ReserveTime2}' where id = '{logId}'";
+                    _commandText = $"update TblPatient set FirstName = N'{patient.FirstName}' , LastName = N'{patient.LastName}' , TellNo = N'{patient.TellNo}' , IdentificationNo = N'{patient.IdentificationNo}' , Province = N'{patient.Province}' , City = N'{patient.City}' , Username = N'{patient.Username}' , Password = N'{patient.Password}' , Secret = N'{patient.Secret}' , ReserveTime = N'{patient.ReserveTime}' , ReserveTime2 = N'{patient.ReserveTime2}' where id = N'{logId}'";
                 }
                 else if (table.GetType() == typeof(TblDoctor))
                 {
                     TblDoctor doctor = (TblDoctor)tableObj;
-                    _commandText = $"update TblDoctor set FirstName = '{doctor.FirstName}' , LastName = '{doctor.LastName}' , TellNo = '{doctor.TellNo}' , IdentificationNo = '{doctor.IdentificationNo}' , Province = '{doctor.Province}' , City = '{doctor.City}' , Cash = '{doctor.Cash}' , Username = '{doctor.Username}' , Password = '{doctor.Password}' , Secret = '{doctor.Secret}' , Section = '{doctor.Section}' , ReservedTill = '{doctor.ReservedTill}' , VisitFee = '{doctor.VisitFee}' where id = '{logId}'";
+                    _commandText = $"update TblDoctor set FirstName = N'{doctor.FirstName}' , LastName = N'{doctor.LastName}' , TellNo = N'{doctor.TellNo}' , IdentificationNo = N'{doctor.IdentificationNo}' , Province = N'{doctor.Province}' , City = N'{doctor.City}' , Cash = N'{doctor.Cash}' , Username = N'{doctor.Username}' , Password = N'{doctor.Password}' , Secret = N'{doctor.Secret}' , Section = N'{doctor.Section}' , ReservedTill = N'{doctor.ReservedTill}' , VisitFee = N'{doctor.VisitFee}' where id = N'{logId}'";
                 }
                 _command = new SqlCommand(_commandText, _connection);
                 _command.ExecuteNonQuery();
@@ -219,7 +219,7 @@ namespace OnlineVisitsApi.Utilities
         {
             try
             {
-                _command = new SqlCommand($"select * from {table.ToString()} where id = '{id}'", _connection);
+                _command = new SqlCommand($"select * from {table.ToString()} where id = N'{id}'", _connection);
                 SqlDataReader reader = _command.ExecuteReader();
                 reader.Read();
                 if (table == Tables.TblProgram)
