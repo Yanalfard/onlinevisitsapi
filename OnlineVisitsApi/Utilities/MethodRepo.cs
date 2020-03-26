@@ -7,22 +7,14 @@ namespace OnlineVisitsApi.Utilities
 {
     public class MethodRepo
     {
-        private static readonly string ConnectionString =
-            ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-
-        private static SqlConnection _connection;
-        private static SqlCommand _command;
-
-        public MethodRepo()
-        {
-            _connection = new SqlConnection(ConnectionString);
-            _connection.Open();
-        }
+        private static readonly string ConnectionString ="Data Source=109.169.76.94;Initial Catalog=azarkand_OnlineVisits;User ID=azarkand_Yanal;Password=1710ahmad.fard";
 
         public static bool ExistInDb(string tableName, string columnName, string columnValue)
         {
-            _command = new SqlCommand($"SELECT id FROM {tableName} WHERE {columnName} = '{columnValue}'", _connection);
-            SqlDataReader reader = _command.ExecuteReader();
+            SqlConnection connection = new SqlConnection(ConnectionString);
+            connection.Open();
+            SqlCommand command = new SqlCommand($"SELECT id FROM {tableName} WHERE {columnName} = '{columnValue}'", connection);
+            SqlDataReader reader = command.ExecuteReader();
             if (reader.Read()) return true;
             return false;
         }

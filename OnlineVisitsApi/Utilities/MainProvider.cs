@@ -61,7 +61,6 @@ namespace OnlineVisitsApi.Utilities
                 else if (table.GetType() == typeof(TblDoctorProgramRel))
                 {
                     TblDoctorProgramRel doctorProgramRel = (TblDoctorProgramRel)tableObj;
-
                     _commandText = $"insert into TblDoctorProgramRel (DoctorId , ProgramId) values (N'{doctorProgramRel.DoctorId}' , N'{doctorProgramRel.ProgramId}' )";
                     command = new SqlCommand($"select TOP (1) * from TblDoctorProgramRel where id = N'{doctorProgramRel.id}' ORDER BY id DESC", _connection);
                     _command = new SqlCommand(_commandText, _connection);
@@ -83,9 +82,9 @@ namespace OnlineVisitsApi.Utilities
                         reader.Read();
                         return new TblPatient(reader["id"].ToString() != "" ? Convert.ToInt32(reader["id"]) : 0, reader["FirstName"].ToString(), reader["LastName"].ToString(), reader["TellNo"].ToString(), reader["IdentificationNo"].ToString(), reader["Province"].ToString(), reader["City"].ToString(), reader["Username"].ToString(), reader["Password"].ToString(), reader["Secret"].ToString(), reader["ReserveTime"].ToString(), reader["ReserveTime2"].ToString());
                     }
-                    else return false;
+                    else return new TblPatient(-1);
                 }
-                else if (table.GetType() == typeof(TblDoctor))
+                else if (table.GetType() == typeof(TblDoctor))
                 {
                     TblDoctor doctor = (TblDoctor)tableObj;
                     if (!MethodRepo.ExistInDb("TblDoctor", "Username", doctor.Username))
@@ -98,7 +97,7 @@ namespace OnlineVisitsApi.Utilities
                         reader.Read();
                         return new TblDoctor(reader["id"].ToString() != "" ? Convert.ToInt32(reader["id"]) : 0, reader["FirstName"].ToString(), reader["LastName"].ToString(), reader["TellNo"].ToString(), reader["IdentificationNo"].ToString(), reader["Province"].ToString(), reader["City"].ToString(), reader["Cash"].ToString() != "" ? long.Parse(reader["Cash"].ToString()) : 0, reader["Username"].ToString(), reader["Password"].ToString(), reader["Secret"].ToString(), reader["Section"].ToString(), reader["ReservedTill"].ToString(), reader["VisitFee"].ToString() != "" ? long.Parse(reader["VisitFee"].ToString()) : 0);
                     }
-                    else return false;
+                    else return new TblDoctor(-1);
                 }
                 _command = new SqlCommand(_commandText, _connection);
                 _command.ExecuteNonQuery();
