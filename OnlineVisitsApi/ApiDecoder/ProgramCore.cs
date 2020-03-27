@@ -20,10 +20,10 @@ namespace OnlineVisitsApi.ApiDecoder
             _httpClient.BaseAddress = new Uri("#localhost#");
 
         }
-        public async Task<TblProgram> AddProgram(TblProgram program)
+        public async Task<DtoTblProgram> AddProgram(TblProgram program)
         {
             HttpResponseMessage httpResponseMessage = await _httpClient.PostAsJsonAsync("api/ProgramCore/AddProgram", program);
-            TblProgram ans = await httpResponseMessage.Content.ReadAsAsync<TblProgram>();
+            DtoTblProgram ans = await httpResponseMessage.Content.ReadAsAsync<DtoTblProgram>();
             return ans;
         }
 

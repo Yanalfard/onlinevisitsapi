@@ -20,10 +20,10 @@ namespace OnlineVisitsApi.ApiDecoder
             _httpClient.BaseAddress = new Uri("#localhost#");
 
         }
-        public async Task<TblDoctorProgramRel> AddDoctorProgramRel(TblDoctorProgramRel doctorProgramRel)
+        public async Task<DtoTblDoctorProgramRel> AddDoctorProgramRel(TblDoctorProgramRel doctorProgramRel)
         {
             HttpResponseMessage httpResponseMessage = await _httpClient.PostAsJsonAsync("api/DoctorProgramRelCore/AddDoctorProgramRel", doctorProgramRel);
-            TblDoctorProgramRel ans = await httpResponseMessage.Content.ReadAsAsync<TblDoctorProgramRel>();
+            DtoTblDoctorProgramRel ans = await httpResponseMessage.Content.ReadAsAsync<DtoTblDoctorProgramRel>();
             return ans;
         }
         public async Task<bool> DeleteDoctorProgramRel(int id)

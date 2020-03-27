@@ -16,6 +16,11 @@ namespace OnlineVisitsApi.Models.Dto
 
         public HttpStatusCode StatusEffect { get; set; }
 
+        public TblProgram ToRegular()
+        {
+            return new TblProgram(id, Day, TimeStart1, TimeEnd1, TimeStart2, TimeEnd2, TimeStart3, TimeEnd3);
+        }
+
         public DtoTblProgram(TblProgram program, HttpStatusCode statusEffect)
         {
             id = program.id;

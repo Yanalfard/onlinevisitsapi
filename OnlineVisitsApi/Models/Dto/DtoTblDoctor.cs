@@ -22,6 +22,11 @@ namespace OnlineVisitsApi.Models.Dto
 
         public HttpStatusCode StatusEffect { get; set; }
 
+        public TblDoctor ToRegular()
+        {
+            return new TblDoctor(id, FirstName, LastName, TellNo, IdentificationNo, Province, City, Cash, Username, Password, Secret, Section, ReservedTill, VisitFee);
+        }
+
         public DtoTblDoctor(TblDoctor doctor, HttpStatusCode statusEffect)
         {
             id = doctor.id;

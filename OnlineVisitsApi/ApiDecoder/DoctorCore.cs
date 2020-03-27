@@ -25,10 +25,10 @@ namespace OnlineVisitsApi.ApiDecoder
         /// </summary>
         /// <param name="doctor"></param>
         /// <returns></returns>
-        public async Task<TblDoctor> AddDoctor(TblDoctor doctor)
+        public async Task<DtoTblDoctor> AddDoctor(TblDoctor doctor)
         {
             HttpResponseMessage httpResponseMessage = await _httpClient.PostAsJsonAsync("api/DoctorCore/AddDoctor", doctor);
-            TblDoctor ans = await httpResponseMessage.Content.ReadAsAsync<TblDoctor>();
+            DtoTblDoctor ans = await httpResponseMessage.Content.ReadAsAsync<DtoTblDoctor>();
             return ans;
         }
         /// <summary>
