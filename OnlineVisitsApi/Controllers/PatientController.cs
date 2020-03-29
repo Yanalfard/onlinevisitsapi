@@ -173,11 +173,26 @@ namespace OnlineVisitsApi.Controllers
             return StatusCode(HttpStatusCode.RequestTimeout);
         }
 
-        [Route("Reserve")]
+        [Route("ReserveStage1")]
         [HttpPost]
-        public IHttpActionResult Reserve(int doctorId)
+        public IHttpActionResult ReserveStage1(int doctorId)
         {
-            var task = Task.Run(() => new PatientService().Reserve(doctorId));
+            var task = Task.Run(() => new PatientService().ReserveStage1(doctorId));
+            if (task.Wait(TimeSpan.FromSeconds(10)))
+                if (task.Result != "")
+                    return Ok(task.Result);
+                else
+                    return Conflict();
+            return StatusCode(HttpStatusCode.RequestTimeout);
+        }
+
+        [Route("ReserveStage2")]
+        [HttpPost]
+        public IHttpActionResult ReserveStage2(List<object> doctorIdStageOnesTime)
+        {
+            int doctorId = JsonConvert.DeserializeObject<int>(doctorIdStageOnesTime[0].ToString());
+            string stageOnesTime = JsonConvert.DeserializeObject<string>(doctorIdStageOnesTime[1].ToString());
+            var task = Task.Run(() => new PatientService().ReserveStage2(doctorId, stageOnesTime));
             if (task.Wait(TimeSpan.FromSeconds(10)))
                 if (task.Result)
                     return Ok(true);

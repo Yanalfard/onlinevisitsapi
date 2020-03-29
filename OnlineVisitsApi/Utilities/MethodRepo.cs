@@ -7,7 +7,7 @@ namespace OnlineVisitsApi.Utilities
 {
     public class MethodRepo
     {
-        private static readonly string ConnectionString ="Data Source=109.169.76.94;Initial Catalog=azarkand_OnlineVisits;User ID=azarkand_Yanal;Password=1710ahmad.fard";
+        private static readonly string ConnectionString = "Data Source=109.169.76.94;Initial Catalog=azarkand_OnlineVisits;User ID=azarkand_Yanal;Password=1710ahmad.fard";
 
         public static bool ExistInDb(string tableName, string columnName, string columnValue)
         {
@@ -37,6 +37,44 @@ namespace OnlineVisitsApi.Utilities
             memoryStream.Write(imageBytes, 0, imageBytes.Length);
             System.Drawing.Image image = System.Drawing.Image.FromStream(memoryStream, true);
             return image;
+        }
+
+        public static DateTime C24To12(string t24)
+        {
+            string[] datetime = t24.Split(' ');
+            string time = datetime[1];
+            string[] timelaps = time.Split(':');
+            int hour = Convert.ToInt32(timelaps[0]);
+            int min = Convert.ToInt32(timelaps[1]);
+            int sec = 0;
+            if (timelaps.Length > 2)
+                sec = Convert.ToInt32(timelaps[2]);
+            if (hour > 12)
+            {
+                hour -= 12;
+                return DateTime.Parse(datetime[0] + " " + hour + ":" + min + ":" + sec + " PM");
+            }
+            if (hour == 12 && (min > 0 || sec > 0))
+                return DateTime.Parse(datetime[0] + " " + hour + ":" + min + ":" + sec + " PM");
+            if (hour == 0 && min == 0 && sec == 0)
+                return DateTime.Parse(t24.Split('.')[0] + " AM");
+            return DateTime.Parse(datetime[0] + " " + datetime[1] + " AM");
+        }
+
+        public static string C12To24(DateTime t12)
+        {
+            string[] datetime = t12.ToString().Split(' ');
+            string[] cdate = datetime[0].Split('/');
+            string date = cdate[2] + '-' + cdate[0] + '-' + cdate[1];
+            string[] time = datetime[1].Split(':');
+            int hour = Convert.ToInt32(time[0]);
+            int min = Convert.ToInt32(time[1]);
+            int sec = Convert.ToInt32(time[2]);
+            if (datetime[2] == "PM")
+                hour += 12;
+            if (hour == 24)
+                hour = 0;
+            return date + " " + hour + ":" + min + ":" + sec;
         }
     }
 }

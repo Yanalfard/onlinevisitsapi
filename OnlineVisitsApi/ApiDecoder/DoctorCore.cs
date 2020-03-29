@@ -66,7 +66,7 @@ namespace OnlineVisitsApi.ApiDecoder
             return ans;
         }
         /// <summary>
-        /// Selects a doctors from OnlineVisits.TblDoctor by its id
+        /// Selects a doctor from OnlineVisits.TblDoctor by its id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>

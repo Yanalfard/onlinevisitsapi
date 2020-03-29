@@ -56,9 +56,14 @@ namespace OnlineVisitsApi.Repositories.Impl
         {
             return new MainProvider().SelectPatientByPassword(password);
         }
-        public bool Reserve(int doctorId)
+        public string ReserveStage1(int doctorId)
         {
-            return new MainProvider().Reserve(doctorId);
+            return new MainProvider().ReserveStage1(doctorId);
+        }
+
+        public bool ReserveStage2(int doctorId, string stageOnesTime)
+        {
+            return new MainProvider().ReserveStage2(doctorId, stageOnesTime);
         }
     }
 }

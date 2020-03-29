@@ -152,6 +152,20 @@ namespace OnlineVisitsApi.ApiDecoder
             DtoTblPatient ans = await httpResponseMessage.Content.ReadAsAsync<DtoTblPatient>();
             return ans;
         }
-
+        public async Task<string> ReserveStage1(int doctorId)
+        {
+            HttpResponseMessage httpResponseMessage = await _httpClient.PostAsJsonAsync($"api/PatientCore/ReserveStage1?doctorId={doctorId}", doctorId);
+            string ans = await httpResponseMessage.Content.ReadAsAsync<string>();
+            return ans;
+        }
+        public async Task<bool> ReserveStage2(int doctorId, string stageOnesTime)
+        {
+            List<object> doctorIdStageOnesTime = new List<object>();
+            doctorIdStageOnesTime.Add(doctorId);
+            doctorIdStageOnesTime.Add(stageOnesTime);
+            HttpResponseMessage httpResponseMessage = await _httpClient.PostAsJsonAsync($"api/PatientCore/ReserveStage2", doctorIdStageOnesTime);
+            bool ans = await httpResponseMessage.Content.ReadAsAsync<bool>();
+            return ans;
+        }
     }
 }
