@@ -2,13 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Web.Http;
 using OnlineVisitsApi.Models.Dto;
 using OnlineVisitsApi.Models.Regular;
 
 namespace OnlineVisitsApi.ApiDecoder
 {
-    public class ProgramCore : ApiController
+    public class ProgramCore
     {
         private HttpClient _httpClient;
 
@@ -17,7 +16,7 @@ namespace OnlineVisitsApi.ApiDecoder
             _httpClient = new HttpClient();
             _httpClient.DefaultRequestHeaders.Accept.Clear();
             _httpClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("api/ProgramCore"));
-            _httpClient.BaseAddress = new Uri("#localhost#");
+            _httpClient.BaseAddress = new Uri(Config.Uri);
 
         }
         public async Task<DtoTblProgram> AddProgram(TblProgram program)

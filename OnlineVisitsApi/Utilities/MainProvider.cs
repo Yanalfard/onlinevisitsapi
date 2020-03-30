@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.IO;
 using System.Linq;
 using OnlineVisitsApi.Models.Regular;
 
@@ -344,7 +343,7 @@ namespace OnlineVisitsApi.Utilities
                     {
                         nowProgram = programs.Single(j => j.Day == i);
                     }
-                    catch (InvalidOperationException e)
+                    catch (InvalidOperationException)
                     {
                         nowProgram = null;
                     }

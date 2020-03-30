@@ -84,6 +84,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiDecoder\Config.cs" />
     <Compile Include="ApiDecoder\DoctorCore.cs" />
     <Compile Include="ApiDecoder\DoctorProgramRelCore.cs" />
     <Compile Include="ApiDecoder\PatientCore.cs" />
