@@ -44,7 +44,7 @@ namespace OnlineVisitsApi.Repositories.Impl
         {
             return new MainProvider().SelectPatientByIdentificationNo(identificationNo);
         }
-        public TblPatient SelectPatientByUsernameAndPassword(string username ,string password)
+        public TblPatient SelectPatientByUsernameAndPassword(string username, string password)
         {
             return new MainProvider().SelectPatientByUsernameAndPassword(username, password);
         }
@@ -61,9 +61,9 @@ namespace OnlineVisitsApi.Repositories.Impl
             return new MainProvider().ReserveStage1(doctorId);
         }
 
-        public bool ReserveStage2(int doctorId, string stageOnesTime)
+        public bool ReserveStage2(int doctorId, int patientId, string stageOnesTime)
         {
-            return new MainProvider().ReserveStage2(doctorId, stageOnesTime);
+            return new MainProvider().ReserveStage2(doctorId, patientId, stageOnesTime);
         }
     }
 }

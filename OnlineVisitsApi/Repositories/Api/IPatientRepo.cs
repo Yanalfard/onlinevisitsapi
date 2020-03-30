@@ -14,11 +14,11 @@ namespace OnlineVisitsApi.Repositories.Api
         TblPatient SelectPatientByFirstName(string firstName);
         TblPatient SelectPatientByLastName(string lastName);
         List<TblPatient> SelectPatientByIdentificationNo(int identificationNo);
-        TblPatient SelectPatientByUsernameAndPassword(string username ,string password);
+        TblPatient SelectPatientByUsernameAndPassword(string username, string password);
         TblPatient SelectPatientByUsername(string username);
         TblPatient SelectPatientByPassword(string password);
         string ReserveStage1(int doctorId);
-        bool ReserveStage2(int doctorId, string stageOnesTime);
+        bool ReserveStage2(int doctorId, int patientId, string stageOnesTime);
 
     }
 }

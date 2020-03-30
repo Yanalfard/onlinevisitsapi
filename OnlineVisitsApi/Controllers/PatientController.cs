@@ -188,11 +188,12 @@ namespace OnlineVisitsApi.Controllers
 
         [Route("ReserveStage2")]
         [HttpPost]
-        public IHttpActionResult ReserveStage2(List<object> doctorIdStageOnesTime)
+        public IHttpActionResult ReserveStage2(List<object> doctorIdPatientIdStageOnesTime)
         {
-            int doctorId = JsonConvert.DeserializeObject<int>(doctorIdStageOnesTime[0].ToString());
-            string stageOnesTime = JsonConvert.DeserializeObject<string>(doctorIdStageOnesTime[1].ToString());
-            var task = Task.Run(() => new PatientService().ReserveStage2(doctorId, stageOnesTime));
+            int doctorId = JsonConvert.DeserializeObject<int>(doctorIdPatientIdStageOnesTime[0].ToString());
+            int patientId = JsonConvert.DeserializeObject<int>(doctorIdPatientIdStageOnesTime[1].ToString());
+            string stageOnesTime = JsonConvert.DeserializeObject<string>(doctorIdPatientIdStageOnesTime[2].ToString());
+            var task = Task.Run(() => new PatientService().ReserveStage2(doctorId, patientId, stageOnesTime));
             if (task.Wait(TimeSpan.FromSeconds(10)))
                 if (task.Result)
                     return Ok(true);

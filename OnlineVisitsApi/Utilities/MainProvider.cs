@@ -275,137 +275,7 @@ namespace OnlineVisitsApi.Utilities
         #endregion
 
         #region TblPatient
-        public string ReserveStage1(int doctorId)
-        {
-            try
-            {
-                _command = new SqlCommand($"SELECT * FROM dbo.TblDoctor WHERE id = {doctorId}", _connection);
-                SqlDataReader reader = _command.ExecuteReader();
-                reader.Read();
-                TblDoctor doctor = new TblDoctor(reader["id"].ToString() != "" ? Convert.ToInt32(reader["id"]) : 0,
-                    reader["FirstName"].ToString(), reader["LastName"].ToString(),
-                    reader["TellNo"].ToString(), reader["IdentificationNo"].ToString(),
-                    reader["Province"].ToString(), reader["City"].ToString(),
-                    reader["Cash"].ToString() != "" ? long.Parse(reader["Cash"].ToString()) : 0,
-                    reader["Username"].ToString(), reader["Password"].ToString(),
-                    reader["Secret"].ToString(), reader["Section"].ToString(),
-                    reader["ReservedTill"].ToString(),
-                    reader["VisitFee"].ToString() != "" ? long.Parse(reader["VisitFee"].ToString()) : 0);
-                reader.Close();
-                reader.Dispose();
-                SqlCommand command2 = new SqlCommand($"SELECT * FROM dbo.TblProgram WHERE id IN (SELECT ProgramId FROM dbo.TblDoctorProgramRel WHERE DoctorId = {doctor.id})", _connection);
-                SqlDataReader reader2 = command2.ExecuteReader();
-                List<TblProgram> programs = new List<TblProgram>();
-                while (reader2.Read())
-                    programs.Add(new TblProgram(reader2["id"].ToString() != "" ? Convert.ToInt32(reader2["id"]) : 0,
-                        reader2["Day"].ToString() != "" ? Convert.ToInt32(reader2["Day"]) : 0,
-                        reader2["TimeStart1"].ToString() != "" ? Convert.ToInt32(reader2["TimeStart1"]) : 0,
-                        reader2["TimeEnd1"].ToString() != "" ? Convert.ToInt32(reader2["TimeEnd1"]) : 0,
-                        reader2["TimeStart2"].ToString() != "" ? Convert.ToInt32(reader2["TimeStart2"]) : 0,
-                        reader2["TimeEnd2"].ToString() != "" ? Convert.ToInt32(reader2["TimeEnd2"]) : 0,
-                        reader2["TimeStart3"].ToString() != "" ? Convert.ToInt32(reader2["TimeStart3"]) : 0,
-                        reader2["TimeEnd3"].ToString() != "" ? Convert.ToInt32(reader2["TimeEnd3"]) : 0));
-                reader2.Close();
-                reader2.Dispose();
-                int dayNo = 0;
-                switch (DateTime.Today.DayOfWeek)
-                {
-                    case DayOfWeek.Saturday:
-                        dayNo = 0;
-                        break;
-                    case DayOfWeek.Sunday:
-                        dayNo = 1;
-                        break;
-                    case DayOfWeek.Monday:
-                        dayNo = 2;
-                        break;
-                    case DayOfWeek.Tuesday:
-                        dayNo = 3;
-                        break;
-                    case DayOfWeek.Wednesday:
-                        dayNo = 4;
-                        break;
-                    case DayOfWeek.Thursday:
-                        dayNo = 5;
-                        break;
-                    case DayOfWeek.Friday:
-                        dayNo = 6;
-                        break;
-                }
 
-                bool isReserved = false;
-                DateTime reserveTime = MethodRepo.C24To12(doctor.ReservedTill);
-                int reservedHour = reserveTime.Hour;
-                for (int i = dayNo; i < 7; i++)
-                {
-                    TblProgram nowProgram;
-                    try
-                    {
-                        nowProgram = programs.Single(j => j.Day == i);
-                    }
-                    catch (InvalidOperationException)
-                    {
-                        nowProgram = null;
-                    }
-                    if (nowProgram != null)
-                    {
-                        if (reservedHour >= nowProgram.TimeStart1 && reservedHour < nowProgram.TimeEnd1)
-                            isReserved = true;
-                        else if (reservedHour >= nowProgram.TimeStart2 && reservedHour < nowProgram.TimeEnd2)
-                            isReserved = true;
-                        else if (reservedHour >= nowProgram.TimeStart3 && reservedHour < nowProgram.TimeEnd3)
-                            isReserved = true;
-
-                        if (isReserved)
-                            return reserveTime.AddMinutes(20).ToString();      //---- JUB DONE
-                    }
-                }
-                
-                return "";
-
-            }
-            catch
-            {
-                return "";
-            }
-            finally
-            {
-                _disconnect();
-            }
-        }
-
-        public bool ReserveStage2(int doctorId, string stageOnesTime)
-        {
-            try
-            {
-                _command = new SqlCommand($"SELECT * FROM dbo.TblDoctor WHERE id = {doctorId}", _connection);
-                SqlDataReader reader = _command.ExecuteReader();
-                reader.Read();
-                TblDoctor doctor = new TblDoctor(reader["id"].ToString() != "" ? Convert.ToInt32(reader["id"]) : 0,
-                    reader["FirstName"].ToString(), reader["LastName"].ToString(),
-                    reader["TellNo"].ToString(), reader["IdentificationNo"].ToString(),
-                    reader["Province"].ToString(), reader["City"].ToString(),
-                    reader["Cash"].ToString() != "" ? long.Parse(reader["Cash"].ToString()) : 0,
-                    reader["Username"].ToString(), reader["Password"].ToString(),
-                    reader["Secret"].ToString(), reader["Section"].ToString(),
-                    reader["ReservedTill"].ToString(),
-                    reader["VisitFee"].ToString() != "" ? long.Parse(reader["VisitFee"].ToString()) : 0);
-                bool isUpdated = Update(
-                      new TblDoctor(doctor.id, doctor.FirstName, doctor.LastName, doctor.TellNo,
-                          doctor.IdentificationNo, doctor.Province, doctor.City, doctor.Cash, doctor.Username,
-                          doctor.Password, doctor.Secret, doctor.Section, stageOnesTime,
-                          doctor.VisitFee), doctorId);
-                return isUpdated;      //---- JUB DONE
-            }
-            catch
-            {
-                return false;
-            }
-            finally
-            {
-                _disconnect();
-            }
-        }
         public TblPatient SelectPatientByFirstName(string firstName)
         {
             try
@@ -528,6 +398,154 @@ namespace OnlineVisitsApi.Utilities
             catch
             {
                 return new TblPatient(-1);
+            }
+            finally
+            {
+                _disconnect();
+            }
+        }
+
+        public string ReserveStage1(int doctorId)
+        {
+            try
+            {
+                _command = new SqlCommand($"SELECT * FROM dbo.TblDoctor WHERE id = {doctorId}", _connection);
+                SqlDataReader reader = _command.ExecuteReader();
+                reader.Read();
+                TblDoctor doctor = new TblDoctor(reader["id"].ToString() != "" ? Convert.ToInt32(reader["id"]) : 0,
+                    reader["FirstName"].ToString(), reader["LastName"].ToString(),
+                    reader["TellNo"].ToString(), reader["IdentificationNo"].ToString(),
+                    reader["Province"].ToString(), reader["City"].ToString(),
+                    reader["Cash"].ToString() != "" ? long.Parse(reader["Cash"].ToString()) : 0,
+                    reader["Username"].ToString(), reader["Password"].ToString(),
+                    reader["Secret"].ToString(), reader["Section"].ToString(),
+                    reader["ReservedTill"].ToString(),
+                    reader["VisitFee"].ToString() != "" ? long.Parse(reader["VisitFee"].ToString()) : 0);
+                reader.Close();
+                reader.Dispose();
+                SqlCommand command2 = new SqlCommand($"SELECT * FROM dbo.TblProgram WHERE id IN (SELECT ProgramId FROM dbo.TblDoctorProgramRel WHERE DoctorId = {doctor.id})", _connection);
+                SqlDataReader reader2 = command2.ExecuteReader();
+                List<TblProgram> programs = new List<TblProgram>();
+                while (reader2.Read())
+                    programs.Add(new TblProgram(reader2["id"].ToString() != "" ? Convert.ToInt32(reader2["id"]) : 0,
+                        reader2["Day"].ToString() != "" ? Convert.ToInt32(reader2["Day"]) : 0,
+                        reader2["TimeStart1"].ToString() != "" ? Convert.ToInt32(reader2["TimeStart1"]) : 0,
+                        reader2["TimeEnd1"].ToString() != "" ? Convert.ToInt32(reader2["TimeEnd1"]) : 0,
+                        reader2["TimeStart2"].ToString() != "" ? Convert.ToInt32(reader2["TimeStart2"]) : 0,
+                        reader2["TimeEnd2"].ToString() != "" ? Convert.ToInt32(reader2["TimeEnd2"]) : 0,
+                        reader2["TimeStart3"].ToString() != "" ? Convert.ToInt32(reader2["TimeStart3"]) : 0,
+                        reader2["TimeEnd3"].ToString() != "" ? Convert.ToInt32(reader2["TimeEnd3"]) : 0));
+                reader2.Close();
+                reader2.Dispose();
+                int dayNo = 0;
+                switch (DateTime.Today.DayOfWeek)
+                {
+                    case DayOfWeek.Saturday:
+                        dayNo = 0;
+                        break;
+                    case DayOfWeek.Sunday:
+                        dayNo = 1;
+                        break;
+                    case DayOfWeek.Monday:
+                        dayNo = 2;
+                        break;
+                    case DayOfWeek.Tuesday:
+                        dayNo = 3;
+                        break;
+                    case DayOfWeek.Wednesday:
+                        dayNo = 4;
+                        break;
+                    case DayOfWeek.Thursday:
+                        dayNo = 5;
+                        break;
+                    case DayOfWeek.Friday:
+                        dayNo = 6;
+                        break;
+                }
+
+                bool isReserved = false;
+                DateTime reserveTime = MethodRepo.C24To12(doctor.ReservedTill);
+                int reservedHour = reserveTime.Hour;
+                for (int i = dayNo; i < 7; i++)
+                {
+                    TblProgram nowProgram;
+                    try
+                    {
+                        nowProgram = programs.Single(j => j.Day == i);
+                    }
+                    catch (InvalidOperationException)
+                    {
+                        nowProgram = null;
+                    }
+                    if (nowProgram != null)
+                    {
+                        if (reservedHour >= nowProgram.TimeStart1 && reservedHour < nowProgram.TimeEnd1)
+                            isReserved = true;
+                        else if (reservedHour >= nowProgram.TimeStart2 && reservedHour < nowProgram.TimeEnd2)
+                            isReserved = true;
+                        else if (reservedHour >= nowProgram.TimeStart3 && reservedHour < nowProgram.TimeEnd3)
+                            isReserved = true;
+
+                        if (isReserved)
+                            return reserveTime.AddMinutes(20).ToString();      //---- JUB DONE
+                    }
+                }
+
+                return "";
+
+            }
+            catch
+            {
+                return "";
+            }
+            finally
+            {
+                _disconnect();
+            }
+        }
+
+        public bool ReserveStage2(int doctorId, int patientId, string stageOnesTime)
+        {
+            try
+            {
+                _command = new SqlCommand($"SELECT * FROM dbo.TblDoctor WHERE id = {doctorId}", _connection);
+                SqlDataReader reader = _command.ExecuteReader();
+                reader.Read();
+                TblDoctor doctor = new TblDoctor(reader["id"].ToString() != "" ? Convert.ToInt32(reader["id"]) : 0,
+                    reader["FirstName"].ToString(), reader["LastName"].ToString(),
+                    reader["TellNo"].ToString(), reader["IdentificationNo"].ToString(),
+                    reader["Province"].ToString(), reader["City"].ToString(),
+                    reader["Cash"].ToString() != "" ? long.Parse(reader["Cash"].ToString()) : 0,
+                    reader["Username"].ToString(), reader["Password"].ToString(),
+                    reader["Secret"].ToString(), reader["Section"].ToString(),
+                    reader["ReservedTill"].ToString(),
+                    reader["VisitFee"].ToString() != "" ? long.Parse(reader["VisitFee"].ToString()) : 0);
+                reader.Close();
+                bool isUpdated = Update(
+                      new TblDoctor(doctor.id, doctor.FirstName, doctor.LastName, doctor.TellNo,
+                          doctor.IdentificationNo, doctor.Province, doctor.City, doctor.Cash, doctor.Username,
+                          doctor.Password, doctor.Secret, doctor.Section, stageOnesTime,
+                          doctor.VisitFee), doctorId);
+                TblPatient patient = (TblPatient)SelectById(Tables.TblPatient, patientId);
+                if (isUpdated)
+                    if (patient.ReserveTime == "")
+                        if (patient.ReserveTime2 == "")
+                            return false;
+                        else
+                            isUpdated = Update(
+                                 new TblPatient(patient.id, patient.FirstName, patient.LastName, patient.TellNo,
+                                     patient.IdentificationNo, patient.Province, patient.City, patient.Username,
+                                     patient.Password, patient.Secret, patient.ReserveTime, stageOnesTime), patientId);
+                    else
+                        isUpdated = Update(
+                             new TblPatient(patient.id, patient.FirstName, patient.LastName, patient.TellNo,
+                                 patient.IdentificationNo, patient.Province, patient.City, patient.Username,
+                                 patient.Password, patient.Secret, stageOnesTime, patient.ReserveTime2), patientId);
+                return isUpdated;      //---- JUB DONE
+            }
+            catch
+            {
+                return false;
             }
             finally
             {
