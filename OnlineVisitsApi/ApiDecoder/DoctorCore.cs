@@ -200,6 +200,17 @@ namespace OnlineVisitsApi.ApiDecoder
             List<DtoTblProgram> ans = await httpResponseMessage.Content.ReadAsAsync<List<DtoTblProgram>>();
             return ans;
         }
+        /// <summary>
+        /// Selects doctors from OnlineVisits.TblDoctor by section
+        /// </summary>
+        /// <param name="section"></param>
+        /// <returns></returns>
+        public async Task<List<DtoTblDoctor>> SelectDoctorBySection(string section)
+        {
+            HttpResponseMessage httpResponseMessage = await _httpClient.PostAsJsonAsync($"api/DoctorCore/SelectDoctorBySection?section={section}", section);
+            List<DtoTblDoctor> ans = await httpResponseMessage.Content.ReadAsAsync<List<DtoTblDoctor>>();
+            return ans;
+        }
 
     }
 }

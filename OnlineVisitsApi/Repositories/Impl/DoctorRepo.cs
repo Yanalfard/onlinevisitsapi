@@ -57,5 +57,9 @@ namespace OnlineVisitsApi.Repositories.Impl
             return new MainProvider().SelectDoctorByPassword(password);
         }
 
+        public List<TblDoctor> SelectDoctorBySection(string section)
+        {
+            return new MainProvider().SelectDoctorBySection(section);
+        }
     }
 }

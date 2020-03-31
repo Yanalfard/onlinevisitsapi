@@ -52,7 +52,11 @@ namespace OnlineVisitsApi.ApiDecoder
             TblDoctorProgramRel ans = await httpResponseMessage.Content.ReadAsAsync<TblDoctorProgramRel>();
             return ans;
         }
-        public async Task<List<TblDoctorProgramRel>> SelectDoctorProgramRelByDoctorId(int doctorId)
+        /// <summary>
+        /// Select DoctorProgramRels from OnlineVisits.TblDoctorProgramRel by doctorId
+        /// </summary>
+        /// <param name="doctorId"></param>
+        /// <returns></returns>        public async Task<List<TblDoctorProgramRel>> SelectDoctorProgramRelByDoctorId(int doctorId)
         {
             HttpResponseMessage httpResponseMessage = await _httpClient.PostAsJsonAsync($"api/DoctorProgramRelCore/SelectDoctorProgramRelsByDoctorId?doctorId={doctorId}", doctorId);
             List<TblDoctorProgramRel> ans = await httpResponseMessage.Content.ReadAsAsync<List<TblDoctorProgramRel>>();

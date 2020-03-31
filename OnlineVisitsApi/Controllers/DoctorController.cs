@@ -173,6 +173,24 @@ namespace OnlineVisitsApi.Controllers
                     return Conflict();
             return StatusCode(HttpStatusCode.RequestTimeout);
         }
+        
+        [Route("SelectDoctorBySection")]
+        [HttpPost]
+        public IHttpActionResult SelectDoctorBySection(string section)
+        {
+            var task = Task.Run(() => new DoctorService().SelectDoctorBySection(section));
+            if (task.Wait(TimeSpan.FromSeconds(10)))
+                if (task.Result != null)
+                {
+                    List<DtoTblDoctor> dto = new List<DtoTblDoctor>();
+                    foreach (TblDoctor obj in task.Result)
+                        dto.Add(new DtoTblDoctor(obj, HttpStatusCode.OK));
+                    return Ok(dto);
+                }
+                else
+                    return Conflict();
+            return StatusCode(HttpStatusCode.RequestTimeout);
+        }
         [Route("SelectProgramByDoctorId")]
         [HttpPost]
         public IHttpActionResult SelectProgramByDoctorId(int doctorId)

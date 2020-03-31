@@ -55,6 +55,12 @@ namespace OnlineVisitsApi.Services.Impl
         {
             return new DoctorRepo().SelectDoctorByPassword(password);
         }
+
+        public List<TblDoctor> SelectDoctorBySection(string section)
+        {
+            return new DoctorRepo().SelectDoctorBySection(section);
+        }
+
         public List<TblProgram>SelectProgramsByDoctorId(int doctorId)
         {
             List<TblDoctorProgramRel> stp1 = new DoctorProgramRelRepo().SelectDoctorProgramRelByDoctorId(doctorId);
