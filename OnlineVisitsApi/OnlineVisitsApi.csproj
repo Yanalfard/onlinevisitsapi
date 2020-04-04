@@ -80,7 +80,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AgoraRTCSDK-3.0.1.js" />
+    <Content Include="assets\common.css" />
     <Content Include="Global.asax" />
+    <Content Include="index.html" />
+    <Content Include="vendor\jquery.min.js" />
+    <Content Include="vendor\materialize.min.css" />
+    <Content Include="vendor\materialize.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -88,11 +94,13 @@
     <Compile Include="ApiDecoder\DoctorCore.cs" />
     <Compile Include="ApiDecoder\DoctorProgramRelCore.cs" />
     <Compile Include="ApiDecoder\PatientCore.cs" />
+    <Compile Include="ApiDecoder\PatientDoctorRelCore.cs" />
     <Compile Include="ApiDecoder\ProgramCore.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\DoctorController.cs" />
     <Compile Include="Controllers\DoctorProgramRelController.cs" />
     <Compile Include="Controllers\PatientController.cs" />
+    <Compile Include="Controllers\PatientDoctorRelController.cs" />
     <Compile Include="Controllers\ProgramController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -100,28 +108,35 @@
     <Compile Include="Models\Dto\DtoTblDoctor.cs" />
     <Compile Include="Models\Dto\DtoTblDoctorProgramRel.cs" />
     <Compile Include="Models\Dto\DtoTblPatient.cs" />
+    <Compile Include="Models\Dto\DtoTblPatientDoctorRel.cs" />
     <Compile Include="Models\Dto\DtoTblProgram.cs" />
     <Compile Include="Models\Regular\TblDoctor.cs" />
     <Compile Include="Models\Regular\TblDoctorProgramRel.cs" />
     <Compile Include="Models\Regular\TblPatient.cs" />
+    <Compile Include="Models\Regular\TblPatientDoctorRel.cs" />
     <Compile Include="Models\Regular\TblProgram.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Api\IDoctorProgramRelRepo.cs" />
     <Compile Include="Repositories\Api\IDoctorRepo.cs" />
+    <Compile Include="Repositories\Api\IPatientDoctorRelRepo.cs" />
     <Compile Include="Repositories\Api\IPatientRepo.cs" />
     <Compile Include="Repositories\Api\IProgramRepo.cs" />
     <Compile Include="Repositories\Impl\DoctorProgramRelRepo.cs" />
     <Compile Include="Repositories\Impl\DoctorRepo.cs" />
+    <Compile Include="Repositories\Impl\PatientDoctorRelRepo.cs" />
     <Compile Include="Repositories\Impl\PatientRepo.cs" />
     <Compile Include="Repositories\Impl\ProgramRepo.cs" />
     <Compile Include="Services\Api\IDoctorProgramRelService.cs" />
     <Compile Include="Services\Api\IDoctorService.cs" />
+    <Compile Include="Services\Api\IPatientDoctorRelService.cs" />
     <Compile Include="Services\Api\IPatientService.cs" />
     <Compile Include="Services\Api\IProgramService.cs" />
     <Compile Include="Services\Impl\DoctorProgramRelService.cs" />
     <Compile Include="Services\Impl\DoctorService.cs" />
+    <Compile Include="Services\Impl\PatientDoctorRelService.cs" />
     <Compile Include="Services\Impl\PatientService.cs" />
     <Compile Include="Services\Impl\ProgramService.cs" />
+    <Compile Include="Utilities\Config.cs" />
     <Compile Include="Utilities\MainProvider.cs" />
     <Compile Include="Utilities\MethodRepo.cs" />
   </ItemGroup>

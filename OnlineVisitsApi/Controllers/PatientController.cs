@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Newtonsoft.Json;
@@ -20,7 +21,7 @@ namespace OnlineVisitsApi.Controllers
             var task = Task.Run(() => new PatientService().AddPatient(patient));
             if (task.Wait(TimeSpan.FromSeconds(10)))
                 if (task.Result != null)
-                    return Ok(true);
+                    return Ok(new DtoTblPatient(task.Result, HttpStatusCode.OK));
                 else
                     return Conflict();
             return StatusCode(HttpStatusCode.RequestTimeout);
@@ -74,32 +75,19 @@ namespace OnlineVisitsApi.Controllers
         {
             var task = Task.Run(() => new PatientService().SelectPatientById(id));
             if (task.Wait(TimeSpan.FromSeconds(10)))
-                if (task.Result != null)
+                if (task.Result.id != -1)
                     return Ok(new DtoTblPatient(task.Result, HttpStatusCode.OK));
                 else
                     return Conflict();
             return StatusCode(HttpStatusCode.RequestTimeout);
         }
-        [Route("SelectPatientByTellNo")]
-        [HttpPost]
-        public IHttpActionResult SelectPatientByTellNo(string tellNo)
-        {
-            var task = Task.Run(() => new PatientService().SelectPatientByTellNo(tellNo));
-            if (task.Wait(TimeSpan.FromSeconds(10)))
-                if (task.Result != null)
-                    return Ok(new DtoTblPatient(task.Result, HttpStatusCode.OK));
-                else
-                    return Conflict();
-            return StatusCode(HttpStatusCode.RequestTimeout);
-        }
-
-        [Route("SelectPatientByFirstName")]
+        [Route("SelectPatientByFirstName")]
         [HttpPost]
         public IHttpActionResult SelectPatientByFirstName(string firstName)
         {
             var task = Task.Run(() => new PatientService().SelectPatientByFirstName(firstName));
             if (task.Wait(TimeSpan.FromSeconds(10)))
-                if (task.Result != null)
+                if (task.Result.id != -1)
                     return Ok(new DtoTblPatient(task.Result, HttpStatusCode.OK));
                 else
                     return Conflict();
@@ -111,7 +99,19 @@ namespace OnlineVisitsApi.Controllers
         {
             var task = Task.Run(() => new PatientService().SelectPatientByLastName(lastName));
             if (task.Wait(TimeSpan.FromSeconds(10)))
-                if (task.Result != null)
+                if (task.Result.id != -1)
+                    return Ok(new DtoTblPatient(task.Result, HttpStatusCode.OK));
+                else
+                    return Conflict();
+            return StatusCode(HttpStatusCode.RequestTimeout);
+        }
+        [Route("SelectPatientByTellNo")]
+        [HttpPost]
+        public IHttpActionResult SelectPatientByTellNo(string tellNo)
+        {
+            var task = Task.Run(() => new PatientService().SelectPatientByTellNo(tellNo));
+            if (task.Wait(TimeSpan.FromSeconds(10)))
+                if (task.Result.id != -1)
                     return Ok(new DtoTblPatient(task.Result, HttpStatusCode.OK));
                 else
                     return Conflict();
@@ -142,7 +142,7 @@ namespace OnlineVisitsApi.Controllers
             string password = JsonConvert.DeserializeObject<string>(usernamePassword[1].ToString());
             var task = Task.Run(() => new PatientService().SelectPatientByUsernameAndPassword(username, password));
             if (task.Wait(TimeSpan.FromSeconds(10)))
-                if (task.Result != null)
+                if (task.Result.id != -1)
                     return Ok(new DtoTblPatient(task.Result, HttpStatusCode.OK));
                 else
                     return Conflict();
@@ -154,7 +154,7 @@ namespace OnlineVisitsApi.Controllers
         {
             var task = Task.Run(() => new PatientService().SelectPatientByUsername(username));
             if (task.Wait(TimeSpan.FromSeconds(10)))
-                if (task.Result != null)
+                if (task.Result.id != -1)
                     return Ok(new DtoTblPatient(task.Result, HttpStatusCode.OK));
                 else
                     return Conflict();
@@ -166,8 +166,25 @@ namespace OnlineVisitsApi.Controllers
         {
             var task = Task.Run(() => new PatientService().SelectPatientByPassword(password));
             if (task.Wait(TimeSpan.FromSeconds(10)))
-                if (task.Result != null)
+                if (task.Result.id != -1)
                     return Ok(new DtoTblPatient(task.Result, HttpStatusCode.OK));
+                else
+                    return Conflict();
+            return StatusCode(HttpStatusCode.RequestTimeout);
+        }
+        [Route("SelectDoctorByPatientId")]
+        [HttpPost]
+        public IHttpActionResult SelectDoctorByPatientId(int patientId)
+        {
+            var task = Task.Run(() => new PatientService().SelectDoctorsByPatientId(patientId));
+            if (task.Wait(TimeSpan.FromSeconds(10)))
+                if (task.Result.Count != 0)
+                {
+                    List<DtoTblDoctor> dto = new List<DtoTblDoctor>();
+                    foreach (TblDoctor obj in task.Result)
+                        dto.Add(new DtoTblDoctor(obj, HttpStatusCode.OK));
+                    return Ok(dto);
+                }
                 else
                     return Conflict();
             return StatusCode(HttpStatusCode.RequestTimeout);
@@ -201,5 +218,6 @@ namespace OnlineVisitsApi.Controllers
                     return Conflict();
             return StatusCode(HttpStatusCode.RequestTimeout);
         }
+
     }
 }

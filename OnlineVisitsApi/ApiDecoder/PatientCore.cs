@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web.Http;
 using OnlineVisitsApi.Models.Dto;
 using OnlineVisitsApi.Models.Regular;
 
@@ -16,22 +17,38 @@ namespace OnlineVisitsApi.ApiDecoder
             _httpClient = new HttpClient();
             _httpClient.DefaultRequestHeaders.Accept.Clear();
             _httpClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("api/PatientCore"));
-            _httpClient.BaseAddress = new Uri(Config.Uri);
+            _httpClient.BaseAddress = new Uri("#localhost#");
 
         }
+        /// <summary>
+        /// Adds a patient to OnlineVisits.TblPatient
+        /// </summary>
+        /// <param name="patient"></param>
+        /// <returns></returns>
         public async Task<DtoTblPatient> AddPatient(TblPatient patient)
         {
             HttpResponseMessage httpResponseMessage = await _httpClient.PostAsJsonAsync("api/PatientCore/AddPatient", patient);
             DtoTblPatient ans = await httpResponseMessage.Content.ReadAsAsync<DtoTblPatient>();
             return ans;
         }
-        public async Task<bool> DeletePatient(int id)
+        /// <summary>
+        /// Deletes a patient from OnlineVisits.TblPatient using its id
+        /// </summary>
+        /// <param name="patient"></param>
+        /// <returns></returns>
+        public async Task<bool> DeletePatient(int id)
         {
             HttpResponseMessage httpResponseMessage = await _httpClient.PostAsJsonAsync($"api/PatientCore/DeletePatient?id={id}", id);
             bool ans = await httpResponseMessage.Content.ReadAsAsync<bool>();
             return ans;
         }
-        public async Task<bool> UpdatePatient(TblPatient patient, int logId)
+        /// <summary>
+        /// Updates a patient at OnlineVisits.TblPatient
+        /// </summary>
+        /// <param name="patient"></param>
+        /// <param name="logId">Old doctors id</param>
+        /// <returns></returns>
+        public async Task<bool> UpdatePatient(TblPatient patient, int logId)
         {
             List<object> patientAndLogId = new List<object>();
             patientAndLogId.Add(patient);
@@ -40,76 +57,25 @@ namespace OnlineVisitsApi.ApiDecoder
             bool ans = await httpResponseMessage.Content.ReadAsAsync<bool>();
             return ans;
         }
-        public async Task<List<DtoTblPatient>> SelectAllPatients()
+        /// <summary>
+        /// Selects all patients from OnlineVisits.TblPatient
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<DtoTblPatient>> SelectAllPatients()
         {
             HttpResponseMessage httpResponseMessage = await _httpClient.GetAsync("api/PatientCore/SelectAllPatients");
             List<DtoTblPatient> ans = await httpResponseMessage.Content.ReadAsAsync<List<DtoTblPatient>>();
             return ans;
         }
-        public async Task<TblPatient> SelectPatientById(int id)
+        /// <summary>
+        /// Selects a doctor from OnlineVisits.TblPatient by its id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<TblPatient> SelectPatientById(int id)
         {
             HttpResponseMessage httpResponseMessage = await _httpClient.PostAsJsonAsync($"api/PatientCore/SelectPatientById?id={id}", id);
             TblPatient ans = await httpResponseMessage.Content.ReadAsAsync<TblPatient>();
-            return ans;
-        }
-        public async Task<DtoTblPatient> SelectPatientByName(string name)
-        {
-            HttpResponseMessage httpResponseMessage = await _httpClient.PostAsJsonAsync($"api/PatientCore/SelectPatientByName?name={name}", name);
-            DtoTblPatient ans = await httpResponseMessage.Content.ReadAsAsync<DtoTblPatient>();
-            return ans;
-        }
-        public async Task<List<DtoTblPatient>> SelectPatientByIsMan(bool isMan)
-        {
-            HttpResponseMessage httpResponseMessage = await _httpClient.PostAsJsonAsync($"api/PatientCore/SelectPatientByIsMan?isMan={isMan}", isMan);
-            List<DtoTblPatient> ans = await httpResponseMessage.Content.ReadAsAsync<List<DtoTblPatient>>();
-            return ans;
-        }
-        public async Task<List<DtoTblPatient>> SelectPatientByCountryId(int countryId)
-        {
-            HttpResponseMessage httpResponseMessage = await _httpClient.PostAsJsonAsync($"api/PatientCore/SelectPatientByCountryId?countryId={countryId}", countryId);
-            List<DtoTblPatient> ans = await httpResponseMessage.Content.ReadAsAsync<List<DtoTblPatient>>();
-            return ans;
-        }
-        public async Task<List<DtoTblPatient>> SelectPatientByCityId(int cityId)
-        {
-            HttpResponseMessage httpResponseMessage = await _httpClient.PostAsJsonAsync($"api/PatientCore/SelectPatientByCityId?cityId={cityId}", cityId);
-            List<DtoTblPatient> ans = await httpResponseMessage.Content.ReadAsAsync<List<DtoTblPatient>>();
-            return ans;
-        }
-        public async Task<List<DtoTblPatient>> SelectPatientByPassNoOrIdentification(int passNoOrIdentification)
-        {
-            HttpResponseMessage httpResponseMessage = await _httpClient.PostAsJsonAsync($"api/PatientCore/SelectPatientByPassNoOrIdentification?passNoOrIdentification={passNoOrIdentification}", passNoOrIdentification);
-            List<DtoTblPatient> ans = await httpResponseMessage.Content.ReadAsAsync<List<DtoTblPatient>>();
-            return ans;
-        }
-        public async Task<DtoTblPatient> SelectPatientByEmail(string email)
-        {
-            HttpResponseMessage httpResponseMessage = await _httpClient.PostAsJsonAsync($"api/PatientCore/SelectPatientByEmail?email={email}", email);
-            DtoTblPatient ans = await httpResponseMessage.Content.ReadAsAsync<DtoTblPatient>();
-            return ans;
-        }
-        public async Task<DtoTblPatient> SelectPatientByTellNo(string tellNo)
-        {
-            HttpResponseMessage httpResponseMessage = await _httpClient.PostAsJsonAsync($"api/PatientCore/SelectPatientByTellNo?tellNo={tellNo}", tellNo);
-            DtoTblPatient ans = await httpResponseMessage.Content.ReadAsAsync<DtoTblPatient>();
-            return ans;
-        }
-        public async Task<List<DtoTblPatient>> SelectPatientByUserPassId(int userPassId)
-        {
-            HttpResponseMessage httpResponseMessage = await _httpClient.PostAsJsonAsync($"api/PatientCore/SelectPatientByUserPassId?userPassId={userPassId}", userPassId);
-            List<DtoTblPatient> ans = await httpResponseMessage.Content.ReadAsAsync<List<DtoTblPatient>>();
-            return ans;
-        }
-        public async Task<DtoTblPatient> SelectPatientByParentalName(string parentalName)
-        {
-            HttpResponseMessage httpResponseMessage = await _httpClient.PostAsJsonAsync($"api/PatientCore/SelectPatientByParentalName?parentalName={parentalName}", parentalName);
-            DtoTblPatient ans = await httpResponseMessage.Content.ReadAsAsync<DtoTblPatient>();
-            return ans;
-        }
-        public async Task<DtoTblPatient> SelectPatientByHelpName(string helpName)
-        {
-            HttpResponseMessage httpResponseMessage = await _httpClient.PostAsJsonAsync($"api/PatientCore/SelectPatientByHelpName?helpName={helpName}", helpName);
-            DtoTblPatient ans = await httpResponseMessage.Content.ReadAsAsync<DtoTblPatient>();
             return ans;
         }
         public async Task<DtoTblPatient> SelectPatientByFirstName(string firstName)
@@ -124,13 +90,24 @@ namespace OnlineVisitsApi.ApiDecoder
             DtoTblPatient ans = await httpResponseMessage.Content.ReadAsAsync<DtoTblPatient>();
             return ans;
         }
+        public async Task<DtoTblPatient> SelectPatientByTellNo(string tellNo)
+        {
+            HttpResponseMessage httpResponseMessage = await _httpClient.PostAsJsonAsync($"api/PatientCore/SelectPatientByTellNo?tellNo={tellNo}", tellNo);
+            DtoTblPatient ans = await httpResponseMessage.Content.ReadAsAsync<DtoTblPatient>();
+            return ans;
+        }
         public async Task<List<DtoTblPatient>> SelectPatientByIdentificationNo(int identificationNo)
         {
             HttpResponseMessage httpResponseMessage = await _httpClient.PostAsJsonAsync($"api/PatientCore/SelectPatientByIdentificationNo?identificationNo={identificationNo}", identificationNo);
             List<DtoTblPatient> ans = await httpResponseMessage.Content.ReadAsAsync<List<DtoTblPatient>>();
             return ans;
         }
-        public async Task<DtoTblPatient> SelectPatientByUsernameAndPassword(string username ,string password)
+        /// <summary>
+        /// Selects doctors from OnlineVisits.TblPatient by sectionId
+        /// </summary>
+        /// <param name="sectionId"></param>
+        /// <returns></returns>
+        public async Task<DtoTblPatient> SelectPatientByUsernameAndPassword(string username ,string password)
         {
             List<object> obj = new List<object>();
             obj.Add(username);
@@ -151,6 +128,13 @@ namespace OnlineVisitsApi.ApiDecoder
             DtoTblPatient ans = await httpResponseMessage.Content.ReadAsAsync<DtoTblPatient>();
             return ans;
         }
+        public async Task<List<DtoTblDoctor>> SelectDoctorByPatientId(int patientId)
+        {
+            HttpResponseMessage httpResponseMessage = await _httpClient.PostAsJsonAsync($"api/DoctorCore/SelectDoctorByPatientId?patientId={patientId}", patientId);
+            List<DtoTblDoctor> ans = await httpResponseMessage.Content.ReadAsAsync<List<DtoTblDoctor>>();
+            return ans;
+        }
+
         public async Task<string> ReserveStage1(int doctorId)
         {
             HttpResponseMessage httpResponseMessage = await _httpClient.PostAsJsonAsync($"api/PatientCore/ReserveStage1?doctorId={doctorId}", doctorId);
@@ -165,6 +149,6 @@ namespace OnlineVisitsApi.ApiDecoder
             HttpResponseMessage httpResponseMessage = await _httpClient.PostAsJsonAsync($"api/PatientCore/ReserveStage2", doctorIdStageOnesTime);
             bool ans = await httpResponseMessage.Content.ReadAsAsync<bool>();
             return ans;
-        }
+        }
     }
 }

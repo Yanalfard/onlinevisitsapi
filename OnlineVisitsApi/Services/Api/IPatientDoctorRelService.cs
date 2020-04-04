@@ -4,9 +4,8 @@ using OnlineVisitsApi.Repositories.Api;
 
 namespace OnlineVisitsApi.Services.Api
 {
-    public interface IPatientService : IPatientRepo
+    public interface IPatientDoctorRelService : IPatientDoctorRelRepo
     {
-        List<TblDoctor>SelectDoctorsByPatientId(int patientId);
 
     }
 }

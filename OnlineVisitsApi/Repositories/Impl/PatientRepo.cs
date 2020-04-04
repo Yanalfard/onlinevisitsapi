@@ -28,10 +28,6 @@ namespace OnlineVisitsApi.Repositories.Impl
         {
             return (TblPatient)new MainProvider().SelectById(MainProvider.Tables.TblPatient, id);
         }
-        public TblPatient SelectPatientByTellNo(string tellNo)
-        {
-            return new MainProvider().SelectPatientByTellNo(tellNo);
-        }
         public TblPatient SelectPatientByFirstName(string firstName)
         {
             return new MainProvider().SelectPatientByFirstName(firstName);
@@ -39,6 +35,10 @@ namespace OnlineVisitsApi.Repositories.Impl
         public TblPatient SelectPatientByLastName(string lastName)
         {
             return new MainProvider().SelectPatientByLastName(lastName);
+        }
+        public TblPatient SelectPatientByTellNo(string tellNo)
+        {
+            return new MainProvider().SelectPatientByTellNo(tellNo);
         }
         public List<TblPatient> SelectPatientByIdentificationNo(int identificationNo)
         {
@@ -56,6 +56,7 @@ namespace OnlineVisitsApi.Repositories.Impl
         {
             return new MainProvider().SelectPatientByPassword(password);
         }
+
         public string ReserveStage1(int doctorId)
         {
             return new MainProvider().ReserveStage1(doctorId);

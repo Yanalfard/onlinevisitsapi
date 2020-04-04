@@ -10,11 +10,11 @@ namespace OnlineVisitsApi.Repositories.Api
         bool UpdatePatient(TblPatient patient, int logId);
         List<TblPatient> SelectAllPatients();
         TblPatient SelectPatientById(int id);
-        TblPatient SelectPatientByTellNo(string tellNo);
         TblPatient SelectPatientByFirstName(string firstName);
         TblPatient SelectPatientByLastName(string lastName);
+        TblPatient SelectPatientByTellNo(string tellNo);
         List<TblPatient> SelectPatientByIdentificationNo(int identificationNo);
-        TblPatient SelectPatientByUsernameAndPassword(string username, string password);
+        TblPatient SelectPatientByUsernameAndPassword(string username ,string password);
         TblPatient SelectPatientByUsername(string username);
         TblPatient SelectPatientByPassword(string password);
         string ReserveStage1(int doctorId);

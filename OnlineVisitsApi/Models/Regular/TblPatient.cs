@@ -12,15 +12,13 @@ namespace OnlineVisitsApi.Models.Regular
         public string Username { get; set; }
         public string Password { get; set; }
         public string Secret { get; set; }
-        public string ReserveTime { get; set; }
-        public string ReserveTime2 { get; set; }
 
         public TblPatient(int id)
         {
             this.id = id;
         }
 
-		public TblPatient(int id, string firstName, string lastName, string tellNo, string identificationNo, string province, string city, string username, string password, string secret, string reserveTime, string reserveTime2)
+		public TblPatient(int id, string firstName, string lastName, string tellNo, string identificationNo, string province, string city, string username, string password, string secret)
         {
             this.id = id;
             FirstName = firstName;
@@ -32,10 +30,8 @@ namespace OnlineVisitsApi.Models.Regular
             Username = username;
             Password = password;
             Secret = secret;
-            ReserveTime = reserveTime;
-            ReserveTime2 = reserveTime2;
         }
-        public TblPatient(string firstName, string lastName, string tellNo, string identificationNo, string province, string city, string username, string password, string secret, string reserveTime, string reserveTime2)
+        public TblPatient(string firstName, string lastName, string tellNo, string identificationNo, string province, string city, string username, string password, string secret)
         {
             FirstName = firstName;
             LastName = lastName;
@@ -46,8 +42,6 @@ namespace OnlineVisitsApi.Models.Regular
             Username = username;
             Password = password;
             Secret = secret;
-            ReserveTime = reserveTime;
-            ReserveTime2 = reserveTime2;
         }
 
         public TblPatient()

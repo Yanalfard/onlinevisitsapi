@@ -1,4 +1,7 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 using OnlineVisitsApi.Models.Regular;
 using OnlineVisitsApi.Repositories.Impl;
 using OnlineVisitsApi.Services.Api;
@@ -9,7 +12,7 @@ namespace OnlineVisitsApi.Services.Impl
     {
         public TblPatient AddPatient(TblPatient patient)
         {
-            return new PatientRepo().AddPatient(patient);
+            return (TblPatient)new PatientRepo().AddPatient(patient);
         }
         public bool DeletePatient(int id)
         {
@@ -27,10 +30,6 @@ namespace OnlineVisitsApi.Services.Impl
         {
             return (TblPatient)new PatientRepo().SelectPatientById(id);
         }
-        public TblPatient SelectPatientByTellNo(string tellNo)
-        {
-            return new PatientRepo().SelectPatientByTellNo(tellNo);
-        }
         public TblPatient SelectPatientByFirstName(string firstName)
         {
             return new PatientRepo().SelectPatientByFirstName(firstName);
@@ -39,11 +38,15 @@ namespace OnlineVisitsApi.Services.Impl
         {
             return new PatientRepo().SelectPatientByLastName(lastName);
         }
+        public TblPatient SelectPatientByTellNo(string tellNo)
+        {
+            return new PatientRepo().SelectPatientByTellNo(tellNo);
+        }
         public List<TblPatient> SelectPatientByIdentificationNo(int identificationNo)
         {
             return new PatientRepo().SelectPatientByIdentificationNo(identificationNo);
         }
-        public TblPatient SelectPatientByUsernameAndPassword(string username ,string password)
+        public TblPatient SelectPatientByUsernameAndPassword(string username, string password)
         {
             return new PatientRepo().SelectPatientByUsernameAndPassword(username, password);
         }
@@ -65,5 +68,15 @@ namespace OnlineVisitsApi.Services.Impl
         {
             return new PatientRepo().ReserveStage2(doctorId, patientId, stageOnesTime);
         }
+
+        public List<TblDoctor> SelectDoctorsByPatientId(int patientId)
+        {
+            List<TblPatientDoctorRel> stp1 = new PatientDoctorRelRepo().SelectPatientDoctorRelByPatientId(patientId);
+            List<TblDoctor> stp2 = new List<TblDoctor>();
+            foreach (TblPatientDoctorRel rel in stp1)
+                stp2.Add(new DoctorRepo().SelectDoctorById(rel.DoctorId));
+            return stp2;
+        }
+
     }
 }
