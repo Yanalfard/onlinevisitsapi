@@ -211,7 +211,7 @@ namespace OnlineVisitsApi.Controllers
         {
             int doctorId = JsonConvert.DeserializeObject<int>(doctorIdPatientIdStageOnesTime[0].ToString());
             int patientId = JsonConvert.DeserializeObject<int>(doctorIdPatientIdStageOnesTime[1].ToString());
-            string stageOnesTime = JsonConvert.DeserializeObject<string>(doctorIdPatientIdStageOnesTime[2].ToString());
+            string stageOnesTime = doctorIdPatientIdStageOnesTime[2].ToString();
             var task = Task.Run(() => new PatientService().ReserveStage2(doctorId, patientId, stageOnesTime));
             if (task.Wait(TimeSpan.FromSeconds(10)))
                 if (task.Result)

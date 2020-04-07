@@ -114,7 +114,7 @@ namespace OnlineVisitsApi.Utilities
                     TblPatientDoctorRel patientDoctorRel = (TblPatientDoctorRel)tableObj;
 
                     _commandText = $"insert into TblPatientDoctorRel (PatientId , DoctorId , Time , IsUp) values (N'{patientDoctorRel.PatientId}' , N'{patientDoctorRel.DoctorId}' , N'{patientDoctorRel.Time}' , N'{patientDoctorRel.IsUp}' )";
-                    command = new SqlCommand($"select TOP (1) * from TblPatientDoctorRel where id = N'{patientDoctorRel.id}' ORDER BY id DESC", _connection);
+                    command = new SqlCommand($"select TOP (1) * from TblPatientDoctorRel where DoctorId = N'{patientDoctorRel.DoctorId}' AND PatientId = '{patientDoctorRel.PatientId}' AND Time = '{patientDoctorRel.Time}' AND IsUp = '{patientDoctorRel.IsUp}' ORDER BY id DESC", _connection);
                     _command = new SqlCommand(_commandText, _connection);
                     _command.ExecuteNonQuery();
                     SqlDataReader reader = command.ExecuteReader();
@@ -566,15 +566,15 @@ namespace OnlineVisitsApi.Utilities
                           doctor.VisitFee), doctorId);
                 if (isUpdated)
                 {
+                    _connection.Open();
                     object obj = Add(new TblPatientDoctorRel(patientId, doctorId, stageOnesTime, true));
                     if (obj is bool)
                         return false;
-                    else if (obj is TblDoctorProgramRel)
-                        if (((TblDoctorProgramRel)obj).id != -1)
+                    if (obj is TblPatientDoctorRel)
+                        if (((TblPatientDoctorRel)obj).id != -1)
                             return true;
                         else
                             return false;
-
                 }
                 return isUpdated;      //---- JUB DONE
             }
@@ -727,7 +727,6 @@ namespace OnlineVisitsApi.Utilities
                 List<TblDoctor> ret = new List<TblDoctor>();
                 _command = new SqlCommand($"select* from TblDoctor where Section = N'{section}'", _connection);
                 SqlDataReader reader = _command.ExecuteReader();
-                reader.Read();
                 while (reader.Read())
                     ret.Add(new TblDoctor(reader["id"].ToString() != "" ? Convert.ToInt32(reader["id"]) : 0, reader["FirstName"].ToString(), reader["LastName"].ToString(), reader["TellNo"].ToString(), reader["IdentificationNo"].ToString(), reader["Province"].ToString(), reader["City"].ToString(), reader["Cash"].ToString() != "" ? long.Parse(reader["Cash"].ToString()) : 0, reader["Username"].ToString(), reader["Password"].ToString(), reader["Secret"].ToString(), reader["Section"].ToString(), reader["ReservedTill"].ToString(), reader["VisitFee"].ToString() != "" ? long.Parse(reader["VisitFee"].ToString()) : 0));
                 return ret;

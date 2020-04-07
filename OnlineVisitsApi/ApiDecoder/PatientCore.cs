@@ -107,7 +107,7 @@ namespace OnlineVisitsApi.ApiDecoder
         /// </summary>
         /// <param name="sectionId"></param>
         /// <returns></returns>
-        public async Task<DtoTblPatient> SelectPatientByUsernameAndPassword(string username ,string password)
+        public async Task<DtoTblPatient> SelectPatientByUsernameAndPassword(string username, string password)
         {
             List<object> obj = new List<object>();
             obj.Add(username);
@@ -141,12 +141,13 @@ namespace OnlineVisitsApi.ApiDecoder
             string ans = await httpResponseMessage.Content.ReadAsAsync<string>();
             return ans;
         }
-        public async Task<bool> ReserveStage2(int doctorId, string stageOnesTime)
+        public async Task<bool> ReserveStage2(int doctorId, int patientId, string stageOnesTime)
         {
-            List<object> doctorIdStageOnesTime = new List<object>();
-            doctorIdStageOnesTime.Add(doctorId);
-            doctorIdStageOnesTime.Add(stageOnesTime);
-            HttpResponseMessage httpResponseMessage = await _httpClient.PostAsJsonAsync($"api/PatientCore/ReserveStage2", doctorIdStageOnesTime);
+            List<object> objs = new List<object>();
+            objs.Add(doctorId);
+            objs.Add(patientId);
+            objs.Add(stageOnesTime);
+            HttpResponseMessage httpResponseMessage = await _httpClient.PostAsJsonAsync($"api/PatientCore/ReserveStage2", objs);
             bool ans = await httpResponseMessage.Content.ReadAsAsync<bool>();
             return ans;
         }
