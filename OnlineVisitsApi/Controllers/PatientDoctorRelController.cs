@@ -83,9 +83,9 @@ namespace OnlineVisitsApi.Controllers
         }
         [Route("SelectPatientDoctorRelsByPatientId")]
         [HttpPost]
-        public IHttpActionResult SelectPatientDoctorRelByPatientId(int ientId)
+        public IHttpActionResult SelectPatientDoctorRelByPatientId(int patientId)
         {
-            var task = Task.Run(() => new PatientDoctorRelService().SelectPatientDoctorRelByPatientId(ientId));
+            var task = Task.Run(() => new PatientDoctorRelService().SelectPatientDoctorRelByPatientId(patientId));
             if (task.Wait(TimeSpan.FromSeconds(10)))
                 if (task.Result.Count != 0)
                 {
@@ -100,9 +100,9 @@ namespace OnlineVisitsApi.Controllers
         }
         [Route("SelectPatientDoctorRelsByDoctorId")]
         [HttpPost]
-        public IHttpActionResult SelectPatientDoctorRelByDoctorId(int torId)
+        public IHttpActionResult SelectPatientDoctorRelByDoctorId(int doctorId)
         {
-            var task = Task.Run(() => new PatientDoctorRelService().SelectPatientDoctorRelByDoctorId(torId));
+            var task = Task.Run(() => new PatientDoctorRelService().SelectPatientDoctorRelByDoctorId(doctorId));
             if (task.Wait(TimeSpan.FromSeconds(10)))
                 if (task.Result.Count != 0)
                 {

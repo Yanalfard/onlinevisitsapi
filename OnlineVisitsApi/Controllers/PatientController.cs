@@ -4,6 +4,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Script.Serialization;
 using Newtonsoft.Json;
 using OnlineVisitsApi.Models.Dto;
 using OnlineVisitsApi.Models.Regular;
@@ -63,6 +64,7 @@ namespace OnlineVisitsApi.Controllers
                     List<DtoTblPatient> dto = new List<DtoTblPatient>();
                     foreach (TblPatient obj in task.Result)
                         dto.Add(new DtoTblPatient(obj, HttpStatusCode.OK));
+                    //string c = JsonConvert.SerializeObject(dto);
                     return Ok(dto);
                 }
                 else
