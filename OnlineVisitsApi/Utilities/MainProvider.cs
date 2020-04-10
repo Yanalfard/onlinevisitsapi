@@ -69,7 +69,6 @@ namespace OnlineVisitsApi.Utilities
                 else if (table.GetType() == typeof(TblDoctorProgramRel))
                 {
                     TblDoctorProgramRel doctorProgramRel = (TblDoctorProgramRel)tableObj;
-
                     _commandText = $"insert into TblDoctorProgramRel (DoctorId , ProgramId) values (N'{doctorProgramRel.DoctorId}' , N'{doctorProgramRel.ProgramId}' )";
                     command = new SqlCommand($"select TOP (1) * from TblDoctorProgramRel where id = N'{doctorProgramRel.id}' ORDER BY id DESC", _connection);
                     _command = new SqlCommand(_commandText, _connection);

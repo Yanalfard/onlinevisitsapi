@@ -20,7 +20,7 @@ namespace OnlineVisitsApi.Controllers
             var task = Task.Run(() => new DoctorProgramRelService().AddDoctorProgramRel(doctorProgramRel));
             if (task.Wait(TimeSpan.FromSeconds(10)))
                 if (task.Result != null)
-                    return Ok(true);
+                    return Ok(new DtoTblDoctorProgramRel(task.Result, HttpStatusCode.OK));
                 else
                     return Conflict();
             return StatusCode(HttpStatusCode.RequestTimeout);
