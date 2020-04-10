@@ -202,7 +202,7 @@ namespace OnlineVisitsApi.Controllers
                     List<DtoTblProgram> dto = new List<DtoTblProgram>();
                     foreach (TblProgram obj in task.Result)
                         dto.Add(new DtoTblProgram(obj, HttpStatusCode.OK));
-                    return Ok(dto.ToArray());
+                    return Ok(dto);
                 }
                 else
                     return Conflict();

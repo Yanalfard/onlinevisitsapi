@@ -82,8 +82,10 @@
   <ItemGroup>
     <Content Include="AgoraRTCSDK-3.0.1.js" />
     <Content Include="assets\common.css" />
+    <Content Include="Call.html" />
     <Content Include="Global.asax" />
     <Content Include="index.html" />
+    <Content Include="profile-01.jpg" />
     <Content Include="vendor\jquery.min.js" />
     <Content Include="vendor\materialize.min.css" />
     <Content Include="vendor\materialize.min.js" />

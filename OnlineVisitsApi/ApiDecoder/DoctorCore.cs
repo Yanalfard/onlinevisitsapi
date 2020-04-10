@@ -196,7 +196,7 @@ namespace OnlineVisitsApi.ApiDecoder
         /// <returns></returns>
         public async Task<List<DtoTblProgram>> SelectProgramByDoctorId(int doctorId)
         {
-            HttpResponseMessage httpResponseMessage = await _httpClient.PostAsJsonAsync($"api/ProgramCore/SelectProgramByDoctorId?doctorId={doctorId}", doctorId);
+            HttpResponseMessage httpResponseMessage = await _httpClient.PostAsJsonAsync($"api/DoctorCore/SelectProgramByDoctorId?doctorId={doctorId}", doctorId);
             List<DtoTblProgram> ans = await httpResponseMessage.Content.ReadAsAsync<List<DtoTblProgram>>();
             return ans;
         }
