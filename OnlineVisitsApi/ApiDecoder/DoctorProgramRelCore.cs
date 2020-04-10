@@ -46,26 +46,26 @@ namespace OnlineVisitsApi.ApiDecoder
             List<DtoTblDoctorProgramRel> ans = await httpResponseMessage.Content.ReadAsAsync<List<DtoTblDoctorProgramRel>>();
             return ans;
         }
-        public async Task<TblDoctorProgramRel> SelectDoctorProgramRelById(int id)
+        public async Task<DtoTblDoctorProgramRel> SelectDoctorProgramRelById(int id)
         {
             HttpResponseMessage httpResponseMessage = await _httpClient.PostAsJsonAsync($"api/DoctorProgramRelCore/SelectDoctorProgramRelById?id={id}", id);
-            TblDoctorProgramRel ans = await httpResponseMessage.Content.ReadAsAsync<TblDoctorProgramRel>();
+            DtoTblDoctorProgramRel ans = await httpResponseMessage.Content.ReadAsAsync<DtoTblDoctorProgramRel>();
             return ans;
         }
         /// <summary>
         /// Select DoctorProgramRels from OnlineVisits.TblDoctorProgramRel by doctorId
         /// </summary>
         /// <param name="doctorId"></param>
-        /// <returns></returns>        public async Task<List<TblDoctorProgramRel>> SelectDoctorProgramRelByDoctorId(int doctorId)
+        /// <returns></returns>        public async Task<List<DtoTblDoctorProgramRel>> SelectDoctorProgramRelByDoctorId(int doctorId)
         {
             HttpResponseMessage httpResponseMessage = await _httpClient.PostAsJsonAsync($"api/DoctorProgramRelCore/SelectDoctorProgramRelsByDoctorId?doctorId={doctorId}", doctorId);
-            List<TblDoctorProgramRel> ans = await httpResponseMessage.Content.ReadAsAsync<List<TblDoctorProgramRel>>();
+            List<DtoTblDoctorProgramRel> ans = await httpResponseMessage.Content.ReadAsAsync<List<DtoTblDoctorProgramRel>>();
             return ans;
         }
-        public async Task<List<TblDoctorProgramRel>> SelectDoctorProgramRelByProgramId(int programId)
+        public async Task<List<DtoTblDoctorProgramRel>> SelectDoctorProgramRelByProgramId(int programId)
         {
             HttpResponseMessage httpResponseMessage = await _httpClient.PostAsJsonAsync($"api/DoctorProgramRelCore/SelectDoctorProgramRelsByProgramId?programId={programId}", programId);
-            List<TblDoctorProgramRel> ans = await httpResponseMessage.Content.ReadAsAsync<List<TblDoctorProgramRel>>();
+            List<DtoTblDoctorProgramRel> ans = await httpResponseMessage.Content.ReadAsAsync<List<DtoTblDoctorProgramRel>>();
             return ans;
         }
 

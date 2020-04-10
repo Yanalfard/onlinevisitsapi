@@ -7,100 +7,82 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Basic Communication</title>
     <link rel="stylesheet" href="./assets/common.css" />
-
-    <script src="http://www.parsecdn.com/js/parse-1.2.2.min.js"></script>
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-    <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
 <body class="agora-theme">
-    <div class="navbar-fixed">
-        <nav class="agora-navbar">
-            <div class="nav-wrapper agora-primary-bg valign-wrapper">
-                <h5 class="left-align">Basic Communication</h5>
-                <a href="https://github.com/AgoraIO/Basic-Video-Call/tree/master/One-to-One-Video/Agora-Web-Tutorial-1to1" class="agora-github-pin"></a>
-            </div>
-        </nav>
-    </div>
-    <style>
-        .ShowBtn {
-            display: normal;
-        }
-
-        .HideBtn {
-            display: none;
-        }
-        /*@media screen and (max-width:765px) {
-            .divMobileSize {
-                display: none;
-            }
-        }
-
-        @media screen and (min-width:766px) {
-            .divMobileSize {
-                display: normal;
-            }
-        }*/
-    </style>
-
+    <script src="http://www.parsecdn.com/js/parse-1.2.2.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script>
         $(document).ready(function () {
-           $('#BtnCancell').addClass('HideBtn');
-           $('#join').click(
-               function()
-               {
-                   // $('#divMobileSize').addClass('HideBtn');
-                   $('#divMobileSize').hide();
-                   $('#BtnCancell').show();
-               });
-            $('#BtnCancell').click(
-                function()
-                {
-                    // $('#divMobileSize').addClass('ShowBtn');
-                    $('#divMobileSize').show();
-                    $('#BtnCancell').hide();
-                });
+            var text = document.getElementById('BtnAppId').value = 'Mehdi';
+            var text = document.getElementById('Btnchannel').value = 'yanal';
+            var text = document.getElementById('Btntoken').value = 'e1786167f8fe4ec1a7e0a7460d5d4bbb';
+            $('#leave').hide();
+            $('.video-placeholder2').hide();
+            window.onload = function () {
+                document.getElementById("join").click();
+            };
+
+            $('#join').click(function () {
+                $('#divMobileSize').hide();
+                $('#leave').show();
+                $('.video-placeholder2').show();
+            })
+            //$('#join').click(function () {
+            //    var BtnAppId = $('#BtnAppId').val();
+            //    var Btnchannel = $('#Btnchannel').val();
+            //    var Btntoken = $('#Btntoken').val();
+            //    if (BtnAppId != "" && Btnchannel != "" && Btntoken != "") {
+            //        $('#divMobileSize').hide();
+            //        $('#leave').show();
+            //        $('.video-placeholder2').show();
+            //    }
+            //    else {
+            //        alert('Please Select Text');
+            //    }
+            //})
+            $('#leave').click(function () {
+                $('#divMobileSize').show();
+                $('#leave').hide();
+                $('.video-placeholder2').hide();
+            })
         })
     </script>
-    <form id="form" class="row col l12 s12">
+
+    <a id="leave" class="btn btn-danger" style="width:50px;height:50px;display:flex;justify-content:center;align-content:center;align-items:center;border-radius:50px; position:absolute;bottom:7%;left:50%;z-index:1;transform: translate(-50%,0);">  <i class="glyphicon glyphicon-earphone" style="font-size:30px;"></i></a>
+    <form id="form" class=" col l12 s12">
         <div class="row container col l12 s12">
-            <div class="col " id="divMobileSize" style="min-width: 433px; max-width: 443px">
+            <div class="col" id="divMobileSize" style="min-width: 433px; max-width: 443px;display:none;">
                 <div class="card" style="margin-top: 0px; margin-bottom: 0px;">
                     <div class="row card-content" style="margin-bottom: 0px;">
                         <div class="input-field">
                             <label for="appID" class="active">App ID</label>
-                            <input type="text" placeholder="App ID" name="appID">
+                            <input id="BtnAppId" type="text" placeholder="App ID" name="appID" value="">
                         </div>
                         <div class="input-field">
                             <label for="channel" class="active">Channel</label>
-                            <input type="text" placeholder="channel" name="channel">
+                            <input id="Btnchannel" type="text" placeholder="channel" name="channel" value="">
                         </div>
                         <div class="input-field">
                             <label for="token" class="active">Token</label>
-                            <input type="text" placeholder="token" name="token">
+                            <input id="Btntoken" type="text" placeholder="token" name="token" value="">
                         </div>
                         <div class="row" style="margin: 0">
                             <div class="col s12">
                                 <button class="btn btn-raised btn-primary waves-effect waves-light" id="join">JOIN</button>
-                                <button class="btn btn-raised btn-primary waves-effect waves-light" id="leave">LEAVE</button>
+                                <!--<button class="btn btn-raised btn-primary waves-effect waves-light" id="leave">LEAVE</button>-->
                                 <button class="btn btn-raised btn-primary waves-effect waves-light" id="publish">PUBLISH</button>
                                 <button class="btn btn-raised btn-primary waves-effect waves-light" id="unpublish">UNPUBLISH</button>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <ul class="collapsible card agora-secondary-border" style="margin-top: .4rem; border: 1px ">
                     <li>
                         <div class="collapsible-header agora-secondary-bg">
                             <h8 class="center-align">ADVANCED SETTINGS</h8>
                         </div>
-                        <!-- ReSharper disable once Html.TagNotClosed -->
                         <div class="collapsible-body card-content">
                             <div class="row">
                                 <div class="col s12">
@@ -154,27 +136,20 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- ReSharper disable once Html.TagNotClosed -->
                     </li>
                 </ul>
             </div>
-            <a id="BtnCancell" class="btn" style="margin-top:50px;">Cancell</a>
-            <div class="col s7" style="display:flex;flex-wrap:wrap;">
+            <div class="col s7">
                 <div class="video-grid" id="video" style="display:flex;flex-wrap:wrap;">
-                    <div class="video-view" style="display:flex;flex-wrap:wrap;">
-                        <div id="local_stream" class="video-placeholder" style="width:100%;"></div>
-                        <div id="local_video_info" class="video-profile hide" style="width:100%;height:200px;background-color:red"></div>
-                        <div id="video_autoplay_local" class="autoplay-fallback hide" style="width:200px;height:200px;background-color:red"></div>
+                    <div class="video-view">
+                        <div id="local_stream" class="video-placeholder2" style="position:absolute;"></div>
+                        <div id="local_video_info" class="video-profile hide"></div>
+                        <div id="video_autoplay_local" class="autoplay-fallback hide"></div>
                     </div>
                 </div>
             </div>
-
-
-
         </div>
     </form>
-
-
     <script src="vendor/jquery.min.js"></script>
     <script src="vendor/materialize.min.js"></script>
     <script src="AgoraRTCSDK-3.0.1.js"></script>
@@ -204,29 +179,23 @@
         }
 
         var Toast = {
-            info: (msg) =>
-            {
-                Toastify(
-                    {
-                        text: msg,
-                        classes: "info-toast"
-                    });
+            info: (msg) => {
+                Toastify({
+                    text: msg,
+                    classes: "info-toast"
+                })
             },
-            notice: (msg) =>
-            {
-                Toastify(
-                    {
-                        text: msg,
-                        classes: "notice-toast"
-                    });
+            notice: (msg) => {
+                Toastify({
+                    text: msg,
+                    classes: "notice-toast"
+                })
             },
-            error: (msg) =>
-            {
-                Toastify(
-                    {
-                        text: msg,
-                        classes: "error-toast"
-                    });
+            error: (msg) => {
+                Toastify({
+                    text: msg,
+                    classes: "error-toast"
+                })
             }
         };
         function validator(formData, fields) {
@@ -338,95 +307,70 @@
 
         function handleEvents(rtc) {
             // Occurs when an error message is reported and requires error handling.
-            rtc.client.on(
-                "error",
-                (err) =>
-                {
-                    console.log(err);
-                });
+            rtc.client.on("error", (err) => {
+                console.log(err)
+            })
             // Occurs when the peer user leaves the channel; for example, the peer user calls Client.leave.
-            rtc.client.on(
-                "peer-leave",
-                function(evt)
-                {
-                    var id = evt.uid;
-                    console.log("id", evt);
-                    if (id != rtc.params.uid)
-                    {
-                        removeView(id);
-                    }
-                    Toast.notice("peer leave")
-                    console.log('peer-leave', id);
-                });
+            rtc.client.on("peer-leave", function (evt) {
+                var id = evt.uid;
+                console.log("id", evt);
+                if (id != rtc.params.uid) {
+                    removeView(id);
+                }
+                Toast.notice("peer leave")
+                console.log('peer-leave', id);
+            })
             // Occurs when the local stream is published.
-            rtc.client.on(
-                "stream-published",
-                function(evt)
-                {
-                    Toast.notice("stream published success")
-                    console.log("stream-published");
-                });
+            rtc.client.on("stream-published", function (evt) {
+                Toast.notice("stream published success")
+                console.log("stream-published");
+            })
             // Occurs when the remote stream is added.
             rtc.client.on("stream-added", function (evt) {
                 var remoteStream = evt.stream;
                 var id = remoteStream.getId();
-                Toast.info("stream-added uid: " + id);
-                if (id !== rtc.params.uid)
-                {
-                    rtc.client.subscribe(
-                        remoteStream,
-                        function(err)
-                        {
-                            console.log("stream subscribe failed", err);
-                        });
+                Toast.info("stream-added uid: " + id)
+                if (id !== rtc.params.uid) {
+                    rtc.client.subscribe(remoteStream, function (err) {
+                        console.log("stream subscribe failed", err);
+                    })
                 }
                 console.log('stream-added remote-uid: ', id);
             });
             // Occurs when a user subscribes to a remote stream.
-            rtc.client.on(
-                "stream-subscribed",
-                function(evt)
-                {
-                    var remoteStream = evt.stream;
-                    var id = remoteStream.getId();
-                    rtc.remoteStreams.push(remoteStream);
-                    addView(id);
-                    remoteStream.play("remote_video_" + id);
-                    Toast.info('stream-subscribed remote-uid: ' + id);
-                    console.log('stream-subscribed remote-uid: ', id);
-                });
+            rtc.client.on("stream-subscribed", function (evt) {
+                var remoteStream = evt.stream;
+                var id = remoteStream.getId();
+                rtc.remoteStreams.push(remoteStream);
+                addView(id);
+                remoteStream.play("remote_video_" + id);
+                Toast.info('stream-subscribed remote-uid: ' + id);
+                console.log('stream-subscribed remote-uid: ', id);
+            })
             // Occurs when the remote stream is removed; for example, a peer user calls Client.unpublish.
-            rtc.client.on(
-                "stream-removed",
-                function(evt)
-                {
-                    var remoteStream = evt.stream;
-                    var id = remoteStream.getId();
-                    Toast.info("stream-removed uid: " + id)
-                    remoteStream.stop("remote_video_" + id);
-                    rtc.remoteStreams = rtc.remoteStreams.filter(
-                        function(stream)
-                        {
-                            return stream.getId() !== id
-                        });
-                    removeView(id);
-                    console.log('stream-removed remote-uid: ', id);
-                });
+            rtc.client.on("stream-removed", function (evt) {
+                var remoteStream = evt.stream;
+                var id = remoteStream.getId();
+                Toast.info("stream-removed uid: " + id)
+                remoteStream.stop("remote_video_" + id);
+                rtc.remoteStreams = rtc.remoteStreams.filter(function (stream) {
+                    return stream.getId() !== id
+                })
+                removeView(id);
+                console.log('stream-removed remote-uid: ', id);
+            })
             rtc.client.on("onTokenPrivilegeWillExpire", function () {
                 // After requesting a new token
                 // rtc.client.renewToken(token);
                 Toast.info("onTokenPrivilegeWillExpire")
                 console.log("onTokenPrivilegeWillExpire")
             });
-            rtc.client.on(
-                "onTokenPrivilegeDidExpire",
-                function()
-                {
-                    // After requesting a new token
-                    // client.renewToken(token);
-                    Toast.info("onTokenPrivilegeDidExpire")
-                    console.log("onTokenPrivilegeDidExpire")
-                });
+            rtc.client.on("onTokenPrivilegeDidExpire", function () {
+                // After requesting a new token
+                // client.renewToken(token);
+                Toast.info("onTokenPrivilegeDidExpire")
+                console.log("onTokenPrivilegeDidExpire")
+            })
         }
 
         /**
@@ -484,51 +428,39 @@
                  *      All users in the same channel should have the same type (number or string) of uid.
                  *      If you use a number as the user ID, it should be a 32-bit unsigned integer with a value ranging from 0 to (232-1).
                 **/
-                rtc.client.join(
-                    option.token ? option.token : null,
-                    option.channel,
-                    option.uid ? +option.uid : null,
-                    function(uid)
-                    {
-                        Toast.notice("join channel: " + option.channel + " success, uid: " + uid);
-                        console.log("join channel: " + option.channel + " success, uid: " + uid);
-                        rtc.joined = true;
+                rtc.client.join(option.token ? option.token : null, option.channel, option.uid ? +option.uid : null, function (uid) {
+                    Toast.notice("join channel: " + option.channel + " success, uid: " + uid);
+                    console.log("join channel: " + option.channel + " success, uid: " + uid);
+                    rtc.joined = true;
 
-                        rtc.params.uid = uid;
+                    rtc.params.uid = uid;
 
-                        // create local stream
-                        rtc.localStream = AgoraRTC.createStream(
-                            {
-                                streamID: rtc.params.uid,
-                                audio: true,
-                                video: true,
-                                screen: false,
-                                microphoneId: option.microphoneId,
-                                cameraId: option.cameraId
-                            });
+                    // create local stream
+                    rtc.localStream = AgoraRTC.createStream({
+                        streamID: rtc.params.uid,
+                        audio: true,
+                        video: true,
+                        screen: false,
+                        microphoneId: option.microphoneId,
+                        cameraId: option.cameraId
+                    })
 
-                        // init local stream
-                        rtc.localStream.init(
-                            function()
-                            {
-                                console.log("init local stream success");
-                                // play stream with html element id "local_stream"
-                                rtc.localStream.play("local_stream")
+                    // init local stream
+                    rtc.localStream.init(function () {
+                        console.log("init local stream success");
+                        // play stream with html element id "local_stream"
+                        rtc.localStream.play("local_stream")
 
-                                // publish local stream
-                                publish(rtc);
-                            },
-                            function(err)
-                            {
-                                Toast.error("stream init failed, please open console see more detail")
-                                console.error("init local stream failed ", err);
-                            });
-                    },
-                    function(err)
-                    {
-                        Toast.error("client join failed, please open console see more detail")
-                        console.error("client join failed", err)
-                    });
+                        // publish local stream
+                        publish(rtc);
+                    }, function (err) {
+                        Toast.error("stream init failed, please open console see more detail")
+                        console.error("init local stream failed ", err);
+                    })
+                }, function (err) {
+                    Toast.error("client join failed, please open console see more detail")
+                    console.error("client join failed", err)
+                })
             }, (err) => {
                 Toast.error("client init failed, please open console see more detail")
                 console.error(err);
@@ -547,17 +479,14 @@
             var oldState = rtc.published;
 
             // publish localStream
-            rtc.client.publish(
-                rtc.localStream,
-                function(err)
-                {
-                    rtc.published = oldState;
-                    console.log("publish failed");
-                    Toast.error("publish failed");
-                    console.error(err);
-                });
-            Toast.info("publish");
-            rtc.published = true;
+            rtc.client.publish(rtc.localStream, function (err) {
+                rtc.published = oldState;
+                console.log("publish failed");
+                Toast.error("publish failed")
+                console.error(err);
+            })
+            Toast.info("publish")
+            rtc.published = true
         }
 
         function unpublish(rtc) {
@@ -570,16 +499,13 @@
                 return;
             }
             var oldState = rtc.published;
-            rtc.client.unpublish(
-                rtc.localStream,
-                function(err)
-                {
-                    rtc.published = oldState;
-                    console.log("unpublish failed");
-                    Toast.error("unpublish failed");
-                    console.error(err);
-                });
-            Toast.info("unpublish");
+            rtc.client.unpublish(rtc.localStream, function (err) {
+                rtc.published = oldState;
+                console.log("unpublish failed");
+                Toast.error("unpublish failed");
+                console.error(err);
+            })
+            Toast.info("unpublish")
             rtc.published = false;
         }
 
@@ -596,128 +522,91 @@
              * Leaves an AgoraRTC Channel
              * This method enables a user to leave a channel.
              **/
-            rtc.client.leave(
-                function()
-                {
-                    // stop stream
-                    rtc.localStream.stop();
-                    // close stream
-                    rtc.localStream.close();
-                    while (rtc.remoteStreams.length > 0)
-                    {
-                        var stream = rtc.remoteStreams.shift();
-                        var id = stream.getId();
-                        stream.stop();
-                        removeView(id);
-                    }
-                    rtc.localStream = null;
-                    rtc.remoteStreams = [];
-                    rtc.client = null;
-                    console.log("client leaves channel success");
-                    rtc.published = false;
-                    rtc.joined = false;
-                    Toast.notice("leave success");
-                },
-                function(err)
-                {
-                    console.log("channel leave failed");
-                    Toast.error("leave success");
-                    console.error(err);
-                });
+            rtc.client.leave(function () {
+                // stop stream
+                rtc.localStream.stop();
+                // close stream
+                rtc.localStream.close();
+                while (rtc.remoteStreams.length > 0) {
+                    var stream = rtc.remoteStreams.shift();
+                    var id = stream.getId();
+                    stream.stop();
+                    removeView(id);
+                }
+                rtc.localStream = null;
+                rtc.remoteStreams = [];
+                rtc.client = null;
+                console.log("client leaves channel success");
+                rtc.published = false;
+                rtc.joined = false;
+                Toast.notice("leave success");
+            }, function (err) {
+                console.log("channel leave failed");
+                Toast.error("leave success");
+                console.error(err);
+            })
         }
 
-        $(
-            function()
-            {
-                getDevices(
-                    function(devices)
-                    {
-                        devices.audios.forEach(
-                            function(audio)
-                            {
-                                $(
-                                    '<option/>',
-                                    {
-                                        value: audio.value,
-                                        text: audio.name,
-                                    }).appendTo("#microphoneId");
-                            });
-                        devices.videos.forEach(
-                            function(video)
-                            {
-                                $(
-                                    '<option/>',
-                                    {
-                                        value: video.value,
-                                        text: video.name,
-                                    }).appendTo("#cameraId");
-                            });
-                        resolutions.forEach(
-                            function(resolution)
-                            {
-                                $(
-                                    '<option/>',
-                                    {
-                                        value: resolution.value,
-                                        text: resolution.name
-                                    }).appendTo("#cameraResolution");
-                            });
-                        M.AutoInit();
-                    })
+        $(function () {
+            getDevices(function (devices) {
+                devices.audios.forEach(function (audio) {
+                    $('<option/>', {
+                        value: audio.value,
+                        text: audio.name,
+                    }).appendTo("#microphoneId");
+                })
+                devices.videos.forEach(function (video) {
+                    $('<option/>', {
+                        value: video.value,
+                        text: video.name,
+                    }).appendTo("#cameraId");
+                })
+                resolutions.forEach(function (resolution) {
+                    $('<option/>', {
+                        value: resolution.value,
+                        text: resolution.name
+                    }).appendTo("#cameraResolution");
+                })
+                M.AutoInit();
+            })
 
-                var fields = ['appID', 'channel'];
+            var fields = ['appID', 'channel'];
 
-                $("#join").on(
-                    "click",
-                    function(e)
-                    {
-                        console.log("join");
-                        e.preventDefault();
-                        var params = serializeformData();
-                        if (validator(params, fields))
-                        {
-                            join(rtc, params);
-                        }
-                    })
+            $("#join").on("click", function (e) {
+                console.log("join");
+                e.preventDefault();
+                var params = serializeformData();
+                if (validator(params, fields)) {
+                    join(rtc, params);
+                }
+            })
 
-                $("#publish").on(
-                    "click",
-                    function(e)
-                    {
-                        console.log("publish");
-                        e.preventDefault();
-                        var params = serializeformData();
-                        if (validator(params, fields))
-                        {
-                            publish(rtc);
-                        }
-                    });
-
-                $("#unpublish").on(
-                    "click",
-                    function(e)
-                    {
-                        console.log("unpublish");
-                        e.preventDefault();
-                        var params = serializeformData();
-                        if (validator(params, fields))
-                        {
-                            unpublish(rtc);
-                        }
-                    });
-
-                $("#leave").on(
-                    "click",
-                    function(e)
-                    {
-                        console.log("leave");
-                        e.preventDefault();
-                        var params = serializeformData();
-                        if (validator(params, fields))
-                        {
-                            leave(rtc);
-                        }
-                    });
+            $("#publish").on("click", function (e) {
+                console.log("publish")
+                e.preventDefault();
+                var params = serializeformData();
+                if (validator(params, fields)) {
+                    publish(rtc);
+                }
             });
+
+            $("#unpublish").on("click", function (e) {
+                console.log("unpublish")
+                e.preventDefault();
+                var params = serializeformData();
+                if (validator(params, fields)) {
+                    unpublish(rtc);
+                }
+            });
+
+            $("#leave").on("click", function (e) {
+                console.log("leave")
+                e.preventDefault();
+                var params = serializeformData();
+                if (validator(params, fields)) {
+                    leave(rtc);
+                }
+            })
+        })
     </script>
 </html>

@@ -9389,11 +9389,22 @@ html, body {
     position: relative;
 }
 
-.agora-theme .video-view,
+
 .agora-theme .video-placeholder,
-.agora-theme #local_stream, .agora-theme #local_video_info {
-    width: 100%;
-    height: 320px;
+.agora-theme #local_video_info {
+    width: 90vw;
+    height: 165vw;
+    z-index: -1;
+}
+
+.video-placeholder2 {
+    margin-top: 20px;
+    margin-left: 20px;
+    width: 25vw;
+    height: 35vw;
+    z-index: 1;
+    border: 3px solid #31a912;
+    border-radius: 25px;
 }
 
 .agora-theme .video-profile {

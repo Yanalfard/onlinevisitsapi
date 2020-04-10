@@ -82,9 +82,9 @@ namespace OnlineVisitsApi.Controllers
         }
         [Route("SelectDoctorProgramRelsByDoctorId")]
         [HttpPost]
-        public IHttpActionResult SelectDoctorProgramRelByDoctorId(int torId)
+        public IHttpActionResult SelectDoctorProgramRelByDoctorId(int doctorId)
         {
-            var task = Task.Run(() => new DoctorProgramRelService().SelectDoctorProgramRelByDoctorId(torId));
+            var task = Task.Run(() => new DoctorProgramRelService().SelectDoctorProgramRelByDoctorId(doctorId));
             if (task.Wait(TimeSpan.FromSeconds(10)))
                 if (task.Result.Count != 0)
                 {
@@ -99,9 +99,9 @@ namespace OnlineVisitsApi.Controllers
         }
         [Route("SelectDoctorProgramRelsByProgramId")]
         [HttpPost]
-        public IHttpActionResult SelectDoctorProgramRelByProgramId(int gramId)
+        public IHttpActionResult SelectDoctorProgramRelByProgramId(int programId)
         {
-            var task = Task.Run(() => new DoctorProgramRelService().SelectDoctorProgramRelByProgramId(gramId));
+            var task = Task.Run(() => new DoctorProgramRelService().SelectDoctorProgramRelByProgramId(programId));
             if (task.Wait(TimeSpan.FromSeconds(10)))
                 if (task.Result.Count != 0)
                 {
