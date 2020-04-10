@@ -50,10 +50,10 @@ namespace OnlineVisitsApi.ApiDecoder
             return ans;
         }
 
-        public async Task<TblProgram> SelectProgramById(int id)
+        public async Task<DtoTblProgram> SelectProgramById(int id)
         {
             HttpResponseMessage httpResponseMessage = await _httpClient.PostAsJsonAsync($"api/ProgramCore/SelectProgramById?id={id}", id);
-            TblProgram ans = await httpResponseMessage.Content.ReadAsAsync<TblProgram>();
+            DtoTblProgram ans = await httpResponseMessage.Content.ReadAsAsync<DtoTblProgram>();
             return ans;
         }
 

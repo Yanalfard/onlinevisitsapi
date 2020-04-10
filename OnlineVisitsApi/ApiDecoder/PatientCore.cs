@@ -72,10 +72,10 @@ namespace OnlineVisitsApi.ApiDecoder
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task<TblPatient> SelectPatientById(int id)
+        public async Task<DtoTblPatient> SelectPatientById(int id)
         {
             HttpResponseMessage httpResponseMessage = await _httpClient.PostAsJsonAsync($"api/PatientCore/SelectPatientById?id={id}", id);
-            TblPatient ans = await httpResponseMessage.Content.ReadAsAsync<TblPatient>();
+            DtoTblPatient ans = await httpResponseMessage.Content.ReadAsAsync<DtoTblPatient>();
             return ans;
         }
         public async Task<DtoTblPatient> SelectPatientByFirstName(string firstName)

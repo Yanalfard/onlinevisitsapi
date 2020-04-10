@@ -17,7 +17,7 @@ namespace OnlineVisitsApi.ApiDecoder
             _httpClient = new HttpClient();
             _httpClient.DefaultRequestHeaders.Accept.Clear();
             _httpClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("api/PatientDoctorRelCore"));
-            _httpClient.BaseAddress = new Uri("#localhost#");
+            _httpClient.BaseAddress = new Uri(Config.Uri);
 
         }
         /// <summary>
