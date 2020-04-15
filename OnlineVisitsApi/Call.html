@@ -7,50 +7,88 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Basic Communication</title>
     <link rel="stylesheet" href="./assets/common.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="http://www.parsecdn.com/js/parse-1.2.2.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body class="agora-theme">
     <script src="http://www.parsecdn.com/js/parse-1.2.2.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
     <script>
         $(document).ready(function ()
         {
-            var text = document.getElementById('BtnAppId').value = 'Mehdi';
-            var text = document.getElementById('Btnchannel').value = 'yanal';
-            var text = document.getElementById('Btntoken').value = 'e1786167f8fe4ec1a7e0a7460d5d4bbb';
-            $('#leave').hide();
-            $('.video-placeholder2').hide();
-            window.onload = function ()
+            var queryString = new Array();
+            let AppId;
+            let channelId;
+            $(function ()
             {
-                document.getElementById("join").click();
-            };
+                if (queryString.length == 0)
+                {
+                    if (window.location.search.split('?').length > 1)
+                    {
+                        var params = window.location.search.split('?')[1].split('&');
+                        for (var i = 0; i < params.length; i++)
+                        {
+                            var key = params[i].split('=')[0];
+                            var value = decodeURIComponent(params[i].split('=')[1]);
+                            queryString[key] = value;
+                        }
+                    }
+                }
+                if (queryString["AppId"] != null)
+                {
+                    AppId = queryString["AppId"];
 
-            $('#join').click(function ()
-            {
-                $('#divMobileSize').hide();
-                $('#leave').show();
-                $('.video-placeholder2').show();
-            })
-            //$('#join').click(function () {
-            //    var BtnAppId = $('#BtnAppId').val();
-            //    var Btnchannel = $('#Btnchannel').val();
-            //    var Btntoken = $('#Btntoken').val();
-            //    if (BtnAppId != "" && Btnchannel != "" && Btntoken != "") {
-            //        $('#divMobileSize').hide();
-            //        $('#leave').show();
-            //        $('.video-placeholder2').show();
-            //    }
-            //    else {
-            //        alert('Please Select Text');
-            //    }
-            //})
-            $('#leave').click(function ()
-            {
-                $('#divMobileSize').show();
+                }
+                if (queryString["channelId"] != null)
+                {
+                    channelId = queryString["channelId"];
+                }
+
+
+                //    document.getElementById('BtnAppId').value = 'Mehdi';
+                //  document.getElementById('Btnchannel').value = 'yanal';
+                document.getElementById('BtnAppId').value = AppId;
+                document.getElementById('Btnchannel').value = channelId;
+                document.getElementById('Btntoken').value = 'e1786167f8fe4ec1a7e0a7460d5d4bbb';
                 $('#leave').hide();
                 $('.video-placeholder2').hide();
-            })
+                window.onload = function ()
+                {
+                    document.getElementById("join").click();
+                };
+
+                $('#join').click(function ()
+                {
+                    $('#divMobileSize').hide();
+                    $('#leave').show();
+                    $('.video-placeholder2').show();
+                })
+                //$('#join').click(function () {
+                //    var BtnAppId = $('#BtnAppId').val();
+                //    var Btnchannel = $('#Btnchannel').val();
+                //    var Btntoken = $('#Btntoken').val();
+                //    if (BtnAppId != "" && Btnchannel != "" && Btntoken != "") {
+                //        $('#divMobileSize').hide();
+                //        $('#leave').show();
+                //        $('.video-placeholder2').show();
+                //    }
+                //    else {
+                //        alert('Please Select Text');
+                //    }
+                //})
+                $('#leave').click(function ()
+                {
+                    $('#leave').hide();
+                    $('.video-placeholder2').hide();
+                    $('body').empty();
+
+                });
+            });
         })
     </script>
 

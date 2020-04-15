@@ -7687,8 +7687,9 @@ input[type=range]::-ms-thumb {
     padding-left: 16px;
     height: 1.5rem;
     line-height: 1.5rem;
-    /* ReSharper disable once ValueShouldHaveUnits */
+    /* ReSharper disable ValueShouldHaveUnits */
     letter-spacing: .4;
+    /* ReSharper restore ValueShouldHaveUnits */
     display: inline-block;
 }
 
@@ -9393,8 +9394,16 @@ html, body {
 .agora-theme .video-placeholder,
 .agora-theme #local_video_info {
     width: 90vw;
-    height: 165vw;
+    height: 160vw;
     z-index: -1;
+    overflow: hidden;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+body {
+    overflow-y: hidden;
+    overflow-x: hidden;
 }
 
 .video-placeholder2 {
@@ -9405,7 +9414,14 @@ html, body {
     z-index: 1;
     border: 3px solid #31a912;
     border-radius: 25px;
+    overflow: hidden;
+    overflow-y: hidden;
+    overflow-x: hidden;
 }
+
+    .video-placeholder2 video, .video-placeholder2 div {
+        border-radius: 25px;
+    }
 
 .agora-theme .video-profile {
     position: absolute;

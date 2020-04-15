@@ -26,7 +26,8 @@ namespace OnlineVisitsApi.Controllers
                     return Conflict();
             return StatusCode(HttpStatusCode.RequestTimeout);
         }
-        [Route("DeletePatientDoctorRel")]
+
+        [Route("DeletePatientDoctorRel")]
         [HttpPost]
         public IHttpActionResult DeletePatientDoctorRel(int id)
         {
@@ -38,7 +39,8 @@ namespace OnlineVisitsApi.Controllers
                     return Conflict();
             return StatusCode(HttpStatusCode.RequestTimeout);
         }
-        [Route("UpdatePatientDoctorRel")]
+
+        [Route("UpdatePatientDoctorRel")]
         [HttpPost]
         public IHttpActionResult UpdatePatientDoctorRel(List<object> patientDoctorRelLogId)
         {
@@ -52,7 +54,8 @@ namespace OnlineVisitsApi.Controllers
                     return Conflict();
             return StatusCode(HttpStatusCode.RequestTimeout);
         }
-        [Route("SelectAllPatientDoctorRels")]
+
+        [Route("SelectAllPatientDoctorRels")]
         [HttpGet]
         public IHttpActionResult SelectAllPatientDoctorRels()
         {
@@ -69,7 +72,8 @@ namespace OnlineVisitsApi.Controllers
                     return Conflict();
             return StatusCode(HttpStatusCode.RequestTimeout);
         }
-        [Route("SelectPatientDoctorRelById")]
+
+        [Route("SelectPatientDoctorRelById")]
         [HttpPost]
         public IHttpActionResult SelectPatientDoctorRelById(int id)
         {
@@ -81,7 +85,8 @@ namespace OnlineVisitsApi.Controllers
                     return Conflict();
             return StatusCode(HttpStatusCode.RequestTimeout);
         }
-        [Route("SelectPatientDoctorRelsByPatientId")]
+
+        [Route("SelectPatientDoctorRelByPatientId")]
         [HttpPost]
         public IHttpActionResult SelectPatientDoctorRelByPatientId(int patientId)
         {
@@ -98,7 +103,8 @@ namespace OnlineVisitsApi.Controllers
                     return Conflict();
             return StatusCode(HttpStatusCode.RequestTimeout);
         }
-        [Route("SelectPatientDoctorRelsByDoctorId")]
+
+        [Route("SelectPatientDoctorRelByDoctorId")]
         [HttpPost]
         public IHttpActionResult SelectPatientDoctorRelByDoctorId(int doctorId)
         {

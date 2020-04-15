@@ -80,7 +80,7 @@ namespace OnlineVisitsApi.Controllers
                     return Conflict();
             return StatusCode(HttpStatusCode.RequestTimeout);
         }
-        [Route("SelectDoctorProgramRelsByDoctorId")]
+        [Route("SelectDoctorProgramRelByDoctorId")]
         [HttpPost]
         public IHttpActionResult SelectDoctorProgramRelByDoctorId(int doctorId)
         {
@@ -97,7 +97,7 @@ namespace OnlineVisitsApi.Controllers
                     return Conflict();
             return StatusCode(HttpStatusCode.RequestTimeout);
         }
-        [Route("SelectDoctorProgramRelsByProgramId")]
+        [Route("SelectDoctorProgramRelByProgramId")]
         [HttpPost]
         public IHttpActionResult SelectDoctorProgramRelByProgramId(int programId)
         {
