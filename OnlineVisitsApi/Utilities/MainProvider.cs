@@ -768,7 +768,5 @@ namespace OnlineVisitsApi.Utilities
         }
 
         #endregion
-
-
     }
 }

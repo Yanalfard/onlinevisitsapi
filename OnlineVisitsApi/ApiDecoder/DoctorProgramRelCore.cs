@@ -58,13 +58,13 @@ namespace OnlineVisitsApi.ApiDecoder
         /// <param name="doctorId"></param>
         /// <returns></returns>        public async Task<List<DtoTblDoctorProgramRel>> SelectDoctorProgramRelByDoctorId(int doctorId)
         {
-            HttpResponseMessage httpResponseMessage = await _httpClient.PostAsJsonAsync($"api/DoctorProgramRelCore/SelectDoctorProgramRelsByDoctorId?doctorId={doctorId}", doctorId);
+            HttpResponseMessage httpResponseMessage = await _httpClient.PostAsJsonAsync($"api/DoctorProgramRelCore/SelectDoctorProgramRelByDoctorId?doctorId={doctorId}", doctorId);
             List<DtoTblDoctorProgramRel> ans = await httpResponseMessage.Content.ReadAsAsync<List<DtoTblDoctorProgramRel>>();
             return ans;
         }
         public async Task<List<DtoTblDoctorProgramRel>> SelectDoctorProgramRelByProgramId(int programId)
         {
-            HttpResponseMessage httpResponseMessage = await _httpClient.PostAsJsonAsync($"api/DoctorProgramRelCore/SelectDoctorProgramRelsByProgramId?programId={programId}", programId);
+            HttpResponseMessage httpResponseMessage = await _httpClient.PostAsJsonAsync($"api/DoctorProgramRelCore/SelectDoctorProgramRelByProgramId?programId={programId}", programId);
             List<DtoTblDoctorProgramRel> ans = await httpResponseMessage.Content.ReadAsAsync<List<DtoTblDoctorProgramRel>>();
             return ans;
         }

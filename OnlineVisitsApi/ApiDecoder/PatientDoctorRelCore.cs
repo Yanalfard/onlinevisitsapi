@@ -85,7 +85,7 @@ namespace OnlineVisitsApi.ApiDecoder
         /// <returns></returns>
         public async Task<List<TblPatientDoctorRel>> SelectPatientDoctorRelByPatientId(int patientId)
         {
-            HttpResponseMessage httpResponseMessage = await _httpClient.PostAsJsonAsync($"api/PatientDoctorRelCore/SelectPatientDoctorRelsByPatientId?patientId={patientId}", patientId);
+            HttpResponseMessage httpResponseMessage = await _httpClient.PostAsJsonAsync($"api/PatientDoctorRelCore/SelectPatientDoctorRelByPatientId?patientId={patientId}", patientId);
             List<TblPatientDoctorRel> ans = await httpResponseMessage.Content.ReadAsAsync<List<TblPatientDoctorRel>>();
             return ans;
         }
@@ -96,7 +96,7 @@ namespace OnlineVisitsApi.ApiDecoder
         /// <returns></returns>
         public async Task<List<DtoTblPatientDoctorRel>> SelectPatientDoctorRelByDoctorId(int doctorId)
         {
-            HttpResponseMessage httpResponseMessage = await _httpClient.PostAsJsonAsync($"api/PatientDoctorRelCore/SelectPatientDoctorRelsByDoctorId?doctorId={doctorId}", doctorId);
+            HttpResponseMessage httpResponseMessage = await _httpClient.PostAsJsonAsync($"api/PatientDoctorRelCore/SelectPatientDoctorRelByDoctorId?doctorId={doctorId}", doctorId);
             List<DtoTblPatientDoctorRel> ans = await httpResponseMessage.Content.ReadAsAsync<List<DtoTblPatientDoctorRel>>();
             return ans;
         }
@@ -107,7 +107,7 @@ namespace OnlineVisitsApi.ApiDecoder
         /// <returns></returns>
         public async Task<List<DtoTblPatientDoctorRel>> SelectPatientDoctorRelByTime(int time)
         {
-            HttpResponseMessage httpResponseMessage = await _httpClient.PostAsJsonAsync($"api/PatientDoctorRelCore/SelectPatientDoctorRelsByTime?time={time}", time);
+            HttpResponseMessage httpResponseMessage = await _httpClient.PostAsJsonAsync($"api/PatientDoctorRelCore/SelectPatientDoctorRelByTime?time={time}", time);
             List<DtoTblPatientDoctorRel> ans = await httpResponseMessage.Content.ReadAsAsync<List<DtoTblPatientDoctorRel>>();
             return ans;
         }
@@ -118,7 +118,7 @@ namespace OnlineVisitsApi.ApiDecoder
         /// <returns></returns>
         public async Task<List<DtoTblPatientDoctorRel>> SelectPatientDoctorRelByIsUp(int isUp)
         {
-            HttpResponseMessage httpResponseMessage = await _httpClient.PostAsJsonAsync($"api/PatientDoctorRelCore/SelectPatientDoctorRelsByIsUp?isUp={isUp}", isUp);
+            HttpResponseMessage httpResponseMessage = await _httpClient.PostAsJsonAsync($"api/PatientDoctorRelCore/SelectPatientDoctorRelByIsUp?isUp={isUp}", isUp);
             List<DtoTblPatientDoctorRel> ans = await httpResponseMessage.Content.ReadAsAsync<List<DtoTblPatientDoctorRel>>();
             return ans;
         }
