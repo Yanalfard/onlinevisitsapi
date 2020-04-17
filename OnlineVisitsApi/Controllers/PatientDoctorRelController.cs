@@ -115,7 +115,7 @@ namespace OnlineVisitsApi.Controllers
                     List<DtoTblPatientDoctorRel> dto = new List<DtoTblPatientDoctorRel>();
                     foreach (TblPatientDoctorRel obj in task.Result)
                         dto.Add(new DtoTblPatientDoctorRel(obj, HttpStatusCode.OK));
-                    return Ok(dto);
+                    return Ok(dto.ToArray());
                 }
                 else
                     return Conflict();

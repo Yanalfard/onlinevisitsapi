@@ -214,8 +214,8 @@ namespace OnlineVisitsApi.Controllers
             string stageOnesTime = doctorIdPatientIdStageOnesTime[2].ToString();
             var task = Task.Run(() => new PatientService().ReserveStage2(doctorId, patientId, stageOnesTime));
             if (task.Wait(TimeSpan.FromSeconds(10)))
-                if (task.Result)
-                    return Ok(true);
+                if (task.Result.id != -1)
+                    return Ok(new DtoTblPatientDoctorRel(task.Result, HttpStatusCode.OK));
                 else
                     return Conflict();
             return StatusCode(HttpStatusCode.RequestTimeout);

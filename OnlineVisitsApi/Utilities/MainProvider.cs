@@ -501,7 +501,16 @@ namespace OnlineVisitsApi.Utilities
                 }
 
                 bool isReserved = false;
-                DateTime reserveTime = MethodRepo.C24To12(doctor.ReservedTill);
+                DateTime reserveTime;
+                try
+                {
+                    reserveTime = MethodRepo.C24To12(doctor.ReservedTill);
+
+                }
+                catch
+                {
+                    reserveTime = DateTime.Now;
+                }
                 int reservedHour = reserveTime.Hour;
                 for (int i = dayNo; i < 7; i++)
                 {
@@ -541,7 +550,7 @@ namespace OnlineVisitsApi.Utilities
             }
         }
 
-        public bool ReserveStage2(int doctorId, int patientId, string stageOnesTime)
+        public TblPatientDoctorRel ReserveStage2(int doctorId, int patientId, string stageOnesTime)
         {
             try
             {
@@ -568,18 +577,21 @@ namespace OnlineVisitsApi.Utilities
                     _connection.Open();
                     object obj = Add(new TblPatientDoctorRel(patientId, doctorId, stageOnesTime, true));
                     if (obj is bool)
-                        return false;
+                        return new TblPatientDoctorRel(-1);
                     if (obj is TblPatientDoctorRel)
-                        if (((TblPatientDoctorRel)obj).id != -1)
-                            return true;
+                        if (((TblPatientDoctorRel) obj).id != -1)
+                        {
+                            _connection.Open();
+                            return SelectPatientDoctorRel(patientId, doctorId, stageOnesTime);
+                        }
                         else
-                            return false;
+                            return new TblPatientDoctorRel(-1);
                 }
-                return isUpdated;      //---- JUB DONE
+                return new TblPatientDoctorRel(-1); ;      //---- JUB DONE
             }
             catch
             {
-                return false;
+                return new TblPatientDoctorRel(-1); ;
             }
             finally
             {
@@ -767,6 +779,24 @@ namespace OnlineVisitsApi.Utilities
             }
         }
 
+        public TblPatientDoctorRel SelectPatientDoctorRel(int patientId, int doctorId, string time)
+        {
+            try
+            {
+                _command = new SqlCommand($"select top (1) * from TblPatientDoctorRel where Time = N'{time}' and PatientId = '{patientId}' and DoctorId = '{doctorId}' order by id DESC", _connection);
+                SqlDataReader reader = _command.ExecuteReader();
+                reader.Read();
+                return new TblPatientDoctorRel(reader["id"].ToString() != "" ? Convert.ToInt32(reader["id"]) : 0, reader["PatientId"].ToString() != "" ? Convert.ToInt32(reader["PatientId"]) : 0, reader["DoctorId"].ToString() != "" ? Convert.ToInt32(reader["DoctorId"]) : 0, reader["Time"].ToString(), reader["IsUp"].ToString() != "" ? Convert.ToBoolean(reader["IsUp"]) : false);
+            }
+            catch
+            {
+                return new TblPatientDoctorRel(-1);
+            }
+            finally
+            {
+                _disconnect();
+            }
+        }
         #endregion
     }
 }

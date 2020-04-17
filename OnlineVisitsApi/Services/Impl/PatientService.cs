@@ -64,7 +64,7 @@ namespace OnlineVisitsApi.Services.Impl
             return new PatientRepo().ReserveStage1(doctorId);
         }
 
-        public bool ReserveStage2(int doctorId, int patientId, string stageOnesTime)
+        public TblPatientDoctorRel ReserveStage2(int doctorId, int patientId, string stageOnesTime)
         {
             return new PatientRepo().ReserveStage2(doctorId, patientId, stageOnesTime);
         }

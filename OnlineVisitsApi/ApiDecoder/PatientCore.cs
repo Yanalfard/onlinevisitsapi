@@ -141,14 +141,14 @@ namespace OnlineVisitsApi.ApiDecoder
             string ans = await httpResponseMessage.Content.ReadAsAsync<string>();
             return ans;
         }
-        public async Task<bool> ReserveStage2(int doctorId, int patientId, string stageOnesTime)
+        public async Task<DtoTblPatientDoctorRel> ReserveStage2(int doctorId, int patientId, string stageOnesTime)
         {
             List<object> objs = new List<object>();
             objs.Add(doctorId);
             objs.Add(patientId);
             objs.Add(stageOnesTime);
             HttpResponseMessage httpResponseMessage = await _httpClient.PostAsJsonAsync($"api/PatientCore/ReserveStage2", objs);
-            bool ans = await httpResponseMessage.Content.ReadAsAsync<bool>();
+            DtoTblPatientDoctorRel ans = await httpResponseMessage.Content.ReadAsAsync<DtoTblPatientDoctorRel>();
             return ans;
         }
     }
