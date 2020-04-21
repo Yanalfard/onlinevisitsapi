@@ -7,7 +7,7 @@ namespace OnlineVisitsApi.Utilities
 {
     public class MethodRepo
     {
-        private static readonly string ConnectionString = "Data Source=109.169.76.94;Initial Catalog=azarkand_OnlineVisits;User ID=azarkand_Yanal;Password=1710ahmad.fard";
+        private static readonly string ConnectionString = Config.ConnectionString;
 
         public static bool ExistInDb(string tableName, string columnName, string columnValue)
         {

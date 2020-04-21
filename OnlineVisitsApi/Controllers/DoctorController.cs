@@ -207,6 +207,22 @@ namespace OnlineVisitsApi.Controllers
                 else
                     return Conflict();
             return StatusCode(HttpStatusCode.RequestTimeout);
+        }        [Route("SelectDoctorIfHasProgram")]
+        [HttpGet]
+        public IHttpActionResult SelectDoctorIfHasProgram()
+        {
+            var task = Task.Run(() => new DoctorService().SelectDoctorIfHasProgram());
+            if (task.Wait(TimeSpan.FromSeconds(10)))
+                if (task.Result.Count != 0)
+                {
+                    List<DtoTblDoctor> dto = new List<DtoTblDoctor>();
+                    foreach (TblDoctor obj in task.Result)
+                        dto.Add(new DtoTblDoctor(obj, HttpStatusCode.OK));
+                    return Ok(dto);
+                }
+                else
+                    return Conflict();
+            return StatusCode(HttpStatusCode.RequestTimeout);
         }
 
     }

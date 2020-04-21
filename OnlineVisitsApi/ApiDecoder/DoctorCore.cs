@@ -211,6 +211,15 @@ namespace OnlineVisitsApi.ApiDecoder
             List<DtoTblDoctor> ans = await httpResponseMessage.Content.ReadAsAsync<List<DtoTblDoctor>>();
             return ans;
         }
-
+        /// <summary>
+        /// Selects doctors from OnlineVisits.TblDoctor if they have program available
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<DtoTblDoctor>> SelectDoctorIfHasProgram()
+        {
+            HttpResponseMessage httpResponseMessage = await _httpClient.GetAsync($"api/DoctorCore/SelectDoctorIfHasProgram");
+            List<DtoTblDoctor> ans = await httpResponseMessage.Content.ReadAsAsync<List<DtoTblDoctor>>();
+            return ans;
+        }
     }
 }

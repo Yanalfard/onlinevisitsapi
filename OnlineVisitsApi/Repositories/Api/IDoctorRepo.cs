@@ -18,6 +18,8 @@ namespace OnlineVisitsApi.Repositories.Api
         TblDoctor SelectDoctorByUsername(string username);
         TblDoctor SelectDoctorByPassword(string password);
         List<TblDoctor> SelectDoctorBySection(string section);
+        List<TblDoctor> SelectDoctorIfHasProgram();
+
 
     }
 }

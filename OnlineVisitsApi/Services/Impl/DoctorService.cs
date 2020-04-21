@@ -43,7 +43,7 @@ namespace OnlineVisitsApi.Services.Impl
         {
             return new DoctorRepo().SelectDoctorByIdentificationNo(identificationNo);
         }
-        public TblDoctor SelectDoctorByUsernameAndPassword(string username ,string password)
+        public TblDoctor SelectDoctorByUsernameAndPassword(string username, string password)
         {
             return new DoctorRepo().SelectDoctorByUsernameAndPassword(username, password);
         }
@@ -61,7 +61,12 @@ namespace OnlineVisitsApi.Services.Impl
             return new DoctorRepo().SelectDoctorBySection(section);
         }
 
-        public List<TblProgram>SelectProgramsByDoctorId(int doctorId)
+        public List<TblDoctor> SelectDoctorIfHasProgram()
+        {
+            return new DoctorRepo().SelectDoctorIfHasProgram();
+        }
+
+        public List<TblProgram> SelectProgramsByDoctorId(int doctorId)
         {
             List<TblDoctorProgramRel> stp1 = new DoctorProgramRelRepo().SelectDoctorProgramRelByDoctorId(doctorId);
             List<TblProgram> stp2 = new List<TblProgram>();

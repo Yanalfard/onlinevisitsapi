@@ -61,5 +61,10 @@ namespace OnlineVisitsApi.Repositories.Impl
         {
             return new MainProvider().SelectDoctorBySection(section);
         }
+
+        public List<TblDoctor> SelectDoctorIfHasProgram()
+        {
+            return new MainProvider().SelectDoctorIfHasProgram();
+        }
     }
 }
