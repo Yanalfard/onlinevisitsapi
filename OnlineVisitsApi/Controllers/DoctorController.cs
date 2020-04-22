@@ -208,10 +208,10 @@ namespace OnlineVisitsApi.Controllers
                     return Conflict();
             return StatusCode(HttpStatusCode.RequestTimeout);
         }        [Route("SelectDoctorIfHasProgram")]
-        [HttpGet]
-        public IHttpActionResult SelectDoctorIfHasProgram()
+        [HttpPost]
+        public IHttpActionResult SelectDoctorIfHasProgram(string section)
         {
-            var task = Task.Run(() => new DoctorService().SelectDoctorIfHasProgram());
+            var task = Task.Run(() => new DoctorService().SelectDoctorIfHasProgram(section));
             if (task.Wait(TimeSpan.FromSeconds(10)))
                 if (task.Result.Count != 0)
                 {

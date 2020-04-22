@@ -61,9 +61,9 @@ namespace OnlineVisitsApi.Services.Impl
             return new DoctorRepo().SelectDoctorBySection(section);
         }
 
-        public List<TblDoctor> SelectDoctorIfHasProgram()
+        public List<TblDoctor> SelectDoctorIfHasProgram(string section)
         {
-            return new DoctorRepo().SelectDoctorIfHasProgram();
+            return new DoctorRepo().SelectDoctorIfHasProgram(section);
         }
 
         public List<TblProgram> SelectProgramsByDoctorId(int doctorId)

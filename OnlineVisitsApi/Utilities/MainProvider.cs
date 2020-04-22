@@ -676,12 +676,12 @@ namespace OnlineVisitsApi.Utilities
             }
         }
 
-        public List<TblDoctor> SelectDoctorIfHasProgram()
+        public List<TblDoctor> SelectDoctorIfHasProgram(string section)
         {
             try
             {
                 List<TblDoctor> ret = new List<TblDoctor>();
-                _command = new SqlCommand($"SELECT * FROM dbo.TblDoctor WHERE id IN (SELECT DoctorId FROM dbo.TblDoctorProgramRel WHERE ProgramId IN (SELECT id FROM dbo.TblProgram))", _connection);
+                _command = new SqlCommand($"SELECT * FROM dbo.TblDoctor WHERE id IN (SELECT DoctorId FROM dbo.TblDoctorProgramRel WHERE ProgramId IN (SELECT id FROM dbo.TblProgram) AND Section = N'{section}')", _connection);
                 SqlDataReader reader = _command.ExecuteReader();
                 while (reader.Read())
                     ret.Add(new TblDoctor(reader["id"].ToString() != "" ? Convert.ToInt32(reader["id"]) : 0, reader["FirstName"].ToString(), reader["LastName"].ToString(), reader["TellNo"].ToString(), reader["IdentificationNo"].ToString(), reader["Province"].ToString(), reader["City"].ToString(), reader["Cash"].ToString() != "" ? long.Parse(reader["Cash"].ToString()) : 0, reader["Username"].ToString(), reader["Password"].ToString(), reader["Secret"].ToString(), reader["Section"].ToString(), reader["ReservedTill"].ToString(), reader["VisitFee"].ToString() != "" ? long.Parse(reader["VisitFee"].ToString()) : 0));

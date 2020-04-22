@@ -215,9 +215,9 @@ namespace OnlineVisitsApi.ApiDecoder
         /// Selects doctors from OnlineVisits.TblDoctor if they have program available
         /// </summary>
         /// <returns></returns>
-        public async Task<List<DtoTblDoctor>> SelectDoctorIfHasProgram()
+        public async Task<List<DtoTblDoctor>> SelectDoctorIfHasProgram(string section)
         {
-            HttpResponseMessage httpResponseMessage = await _httpClient.GetAsync($"api/DoctorCore/SelectDoctorIfHasProgram");
+            HttpResponseMessage httpResponseMessage = await _httpClient.PostAsJsonAsync($"api/DoctorCore/SelectDoctorIfHasProgram?section={section}", section);
             List<DtoTblDoctor> ans = await httpResponseMessage.Content.ReadAsAsync<List<DtoTblDoctor>>();
             return ans;
         }
